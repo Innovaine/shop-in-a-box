@@ -477,3 +477,12 @@ To address all issues (including breaking changes), run:
 Run `npm audit` for details.
 ```
 Full output: [`server-runs/2026-05-13T18-47-23-app-cd-shop-in-a-box-npm-install--D-playwrig-1.log`](server-runs/2026-05-13T18-47-23-app-cd-shop-in-a-box-npm-install--D-playwrig-1.log)
+
+## 2026-05-13T18:48:20.391Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `8c26fb4` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exec-error: SSH exec timeout (30000ms), 31803ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/ --reporter=list 2>&1
+```
+ERROR: SSH exec timeout (30000ms)
