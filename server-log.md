@@ -1378,3 +1378,25 @@ Node.js v24.15.0
 Script check failed
 ```
 Full output: [`server-runs/2026-05-13T19-15-33-app-cd-shop-in-a-box-sed--n-script-script-p--1.log`](server-runs/2026-05-13T19-15-33-app-cd-shop-in-a-box-sed--n-script-script-p--1.log)
+
+## 2026-05-13T19:16:04.991Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `66fabee` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✗ exit 1, 2388ms)
+```
+cd ~/shop-in-a-box && sed -n '/<script>/,/<\/script>/p' storefront.html | sed '/<script>/d;/<\/script>/d' > /tmp/storefront-script.js && node -c /tmp/storefront-script.js 2>&1 && echo "✓ No syntax errors"
+```
+STDOUT:
+```
+/tmp/storefront-script.js:8
+          'The link you followed doesn't include a shop ID.',
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at wrapSafe (node:internal/modules/cjs/loader:1763:18)
+    at checkSyntax (node:internal/main/check_syntax:76:3)
+
+Node.js v24.15.0
+```
+ERROR: command exited 1
+Full output: [`server-runs/2026-05-13T19-16-04-app-cd-shop-in-a-box-sed--n-script-script-p--1.log`](server-runs/2026-05-13T19-16-04-app-cd-shop-in-a-box-sed--n-script-script-p--1.log)
