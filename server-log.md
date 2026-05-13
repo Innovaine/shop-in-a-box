@@ -74,3 +74,27 @@ STDOUT:
 #15 DONE 0.0s
 ```
 Full output: [`server-runs/2026-05-13T18-40-40-app-cd-shop-in-a-box-sudo-docker-compose-dow-1.log`](server-runs/2026-05-13T18-40-40-app-cd-shop-in-a-box-sudo-docker-compose-dow-1.log)
+
+## 2026-05-13T18:41:04.887Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `6d6396d` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 5412ms)
+```
+sleep 3 && curl -f http://localhost:3000/health && echo "" && curl -I http://localhost:3000/upload
+```
+STDOUT:
+```
+{"status":"ok","timestamp":"2026-05-13T18:41:04.686Z","merchants":0,"orders":0}
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Wed, 13 May 2026 18:40:14 GMT
+ETag: W/"34c0-19e22a3b2b0"
+Content-Type: text/html; charset=UTF-8
+Content-Length: 13504
+Date: Wed, 13 May 2026 18:41:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+```
+Full output: [`server-runs/2026-05-13T18-41-04-app-sleep-3-curl--f-http-localhost-3000-heal-1.log`](server-runs/2026-05-13T18-41-04-app-sleep-3-curl--f-http-localhost-3000-heal-1.log)
