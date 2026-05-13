@@ -162,3 +162,21 @@ STDOUT:
  Image shop-in-a-box-app Built
 ```
 Full output: [`server-runs/2026-05-13T18-42-12-app-cd-shop-in-a-box-docker-compose-build-2--1.log`](server-runs/2026-05-13T18-42-12-app-cd-shop-in-a-box-docker-compose-build-2--1.log)
+
+## 2026-05-13T18:42:30.328Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `feb3e57` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 6808ms)
+```
+cd ~/shop-in-a-box && docker compose down && docker compose up -d && sleep 3 && curl -s http://localhost:3000/health | jq .
+```
+STDOUT:
+```
+{
+  "status": "ok",
+  "timestamp": "2026-05-13T18:42:29.993Z",
+  "merchants": 0,
+  "orders": 0
+}
+```
+Full output: [`server-runs/2026-05-13T18-42-30-app-cd-shop-in-a-box-docker-compose-down-doc-1.log`](server-runs/2026-05-13T18-42-30-app-cd-shop-in-a-box-docker-compose-down-doc-1.log)
