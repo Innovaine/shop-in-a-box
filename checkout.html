@@ -312,7 +312,7 @@
       currentMerchantId = merchantId;
       
       document.getElementById('product-name').textContent = product.name;
-      document.getElementById('total-price').textContent = `${((product.price || 0) / 100).toFixed(2)}`;
+      document.getElementById('total-price').textContent = `${(product.price || 0).toFixed(2)}`;
       document.getElementById('loading-container').style.display = 'none';
       document.getElementById('checkout-form').style.display = 'block';
     }

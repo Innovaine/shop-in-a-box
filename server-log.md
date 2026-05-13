@@ -1656,3 +1656,55 @@ Running 1 test using 1 worker
 ```
 ERROR: command exited 1
 Full output: [`server-runs/2026-05-13T19-41-14-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-41-14-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
+
+## 2026-05-13T19:42:11.742Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `bf8ae46` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✗ exit 1, 11786ms)
+```
+cd ~/shop-in-a-box && git pull --ff-only && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts --reporter=list
+```
+STDOUT:
+```
+Updating 832fcc1..bf8ae46
+Fast-forward
+ server-log.md                | 124 +++++++++++++++++++++++++++++++++++++++++++
+ tests/web/storefront.spec.ts |  15 +++---
+ 2 files changed, 130 insertions(+), 9 deletions(-)
+
+Running 1 test using 1 worker
+
+✓ Created test merchant: b8f3f6a3-7d34-42fb-8cc5-9b4b62179c4b
+  ✘  1 tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly (5.1s)
+
+
+  1) tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="product-price"]').filter({ hasText: '35.00' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="product-price"]').filter({ hasText: '35.00' })[22m
+
+
+      38 |   // Check first product
+      39 |   await expect(page.locator('[data-testid="product-name"]').filter({ hasText: 'Chocolate Cake' })).toBeVisible();
+    > 40 |   await expect(page.locator('[data-testid="product-price"]').filter({ hasText: '35.00' })).toBeVisible();
+         |                                                                                            ^
+      41 |   
+      42 |   // Check second product
+      43 |   await expect(page.locator('[data-testid="product-name"]').filter({ hasText: 'Croissant' })).toBeVisible();
+        at /home/engineer/shop-in-a-box/tests/web/storefront.spec.ts:40:92
+
+    Error Context: test-results/tests-web-storefront-store-d8d8d-merchant-products-correctly/error-context.md
+
+  1 failed
+    tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ─────────────
+```
+ERROR: command exited 1
+Full output: [`server-runs/2026-05-13T19-42-11-app-cd-shop-in-a-box-git-pull---ff-only-PLAY-1.log`](server-runs/2026-05-13T19-42-11-app-cd-shop-in-a-box-git-pull---ff-only-PLAY-1.log)
