@@ -505,3 +505,51 @@ STDOUT:
 e1247e9c9f61   shop-in-a-box-app           "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes (unhealthy)     0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp   shop-in-a-box-app-1
 ```
 Full output: [`server-runs/2026-05-13T18-48-38-app-curl--s-http-localhost-3000-health-jq-.--1.log`](server-runs/2026-05-13T18-48-38-app-curl--s-http-localhost-3000-health-jq-.--1.log)
+
+## 2026-05-13T18:48:57.102Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `6665896` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 3863ms)
+```
+cd ~/shop-in-a-box && timeout 120 bash -c 'PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts --reporter=list' 2>&1 | tee /tmp/playwright-storefront.log && echo "EXIT_CODE: $?"
+```
+STDOUT:
+```
+
+Running 1 test using 1 worker
+
+✓ Created test merchant: 05d2d40a-e674-4f7b-8859-1b8e575fe29a
+  ✘  1 tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly (127ms)
+
+
+  1) tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('h1, h2')
+    Expected substring: [32m"Test Bakery"[39m
+    Error: strict mode violation: locator('h1, h2') resolved to 2 elements:
+        1) <h1 class="hero-heading">Order Fresh Flowers</h1> aka getByRole('heading', { name: 'Order Fresh Flowers' })
+        2) <h2 class="checkout-heading">Complete Your Order</h2> aka getByText('Complete Your Order')
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for locator('h1, h2')[22m
+
+
+      31 |   
+      32 |   // Check page title/header displays shop name
+    > 33 |   await expect(page.locator('h1, h2')).toContainText('Test Bakery');
+         |                                        ^
+      34 |   
+      35 |   // Verify all three products are displayed
+      36 |   const productCards = page.locator('[data-testid="product-card"], .product-item, .product');
+        at /home/tester/shop-in-a-box/tests/web/storefront.spec.ts:33:40
+
+    Error Context: test-results/tests-web-storefront-store-d8d8d-merchant-products-correctly/error-context.md
+
+  1 failed
+    tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ─────────────
+EXIT_CODE: 0
+```
+Full output: [`server-runs/2026-05-13T18-48-57-app-cd-shop-in-a-box-timeout-120-bash--c-PLA-1.log`](server-runs/2026-05-13T18-48-57-app-cd-shop-in-a-box-timeout-120-bash--c-PLA-1.log)
