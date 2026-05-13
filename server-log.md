@@ -1840,3 +1840,16 @@ STDOUT:
 {"success":true,"merchantId":"f008cd0c-579a-4ef4-9deb-6410b91f6eb1","shopUrl":"http://localhost:3000/shop/f008cd0c-579a-4ef4-9deb-6410b91f6eb1"}
 ```
 Full output: [`server-runs/2026-05-13T19-46-32-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-46-32-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
+
+## 2026-05-13T19:46:52.022Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `594a8c0` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 3175ms)
+```
+curl -s http://localhost:3000/shop/f008cd0c-579a-4ef4-9deb-6410b91f6eb1 | grep -E "(Loading shop|TestItem|12\.50)" | head -10
+```
+STDOUT:
+```
+      <h1 id="shop-name">Loading shop...</h1>
+```
+Full output: [`server-runs/2026-05-13T19-46-52-app-curl--s-http-localhost-3000-shop-f008cd0-1.log`](server-runs/2026-05-13T19-46-52-app-curl--s-http-localhost-3000-shop-f008cd0-1.log)
