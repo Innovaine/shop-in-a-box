@@ -1216,3 +1216,89 @@ Running 1 test using 1 worker
 ```
 ERROR: command exited 1
 Full output: [`server-runs/2026-05-13T19-13-32-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-13-32-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
+
+## 2026-05-13T19:14:04.699Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `a5d73a8` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 6251ms)
+```
+cat > /tmp/debug-storefront-fetch.js << 'EOF'
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  
+  // Intercept all requests and log them
+  page.on('request', req => {
+    console.log('📤 REQUEST:', req.method(), req.url());
+  });
+  
+  page.on('response', res => {
+    console.log('📥 RESPONSE:', res.status(), res.url());
+  });
+  
+  page.on('console', msg => {
+    console.log('🖥️  CONSOLE:', msg.type(), msg.text());
+  });
+  
+  page.on('pageerror', err => {
+    console.log('❌ PAGE ERROR:', err);
+  });
+  
+  // Create merchant
+  const resp = await page.request.post('http://localhost:3000/api/merchant/create', {
+    headers: { 'Content-Type': 'application/json' },
+    data: {
+      shopName: 'Test Florist Debug',
+      category: 'flowers',
+      email: 'test@example.com',
+      items: [{ name: 'Roses', description: 'Red roses', price: 25.00 }]
+    }
+  });
+  const merchantData = await resp.json();
+  const merchantId = merchantData.merchantId;
+  
+  console.log('\n✓ Created merchant:', merchantId);
+  console.log('🌐 Navigating to storefront...\n');
+  
+  // Navigate to storefront
+  await page.goto(`http://localhost:3000/shop/${merchantId}`, { waitUntil: 'load' });
+  
+  console.log('\n⏳ Waiting 3 seconds for fetch to complete...');
+  await page.waitForTimeout(3000);
+  
+  // Check h1 content
+  const h1 = await page.locator('h1#shop-name').textContent();
+  console.log('📝 H1 content:', h1);
+  
+  // Check if error container is shown
+  const errorDiv = await page.locator('.error-container').count();
+  console.log('❌ Error containers visible:', errorDiv);
+  
+  // Check the actual DOM
+  const contentDiv = await page.locator('#content').innerHTML();
+  console.log('📄 Content div HTML (first 300 chars):', contentDiv.substring(0, 300));
+  
+  await browser.close();
+})();
+EOF
+cd ~/shop-in-a-box && node /tmp/debug-storefront-fetch.js
+```
+STDOUT:
+```
+
+✓ Created merchant: 17038163-2605-4d0d-a877-b64cd151d6c2
+🌐 Navigating to storefront...
+
+📤 REQUEST: GET http://localhost:3000/shop/17038163-2605-4d0d-a877-b64cd151d6c2
+📥 RESPONSE: 200 http://localhost:3000/shop/17038163-2605-4d0d-a877-b64cd151d6c2
+❌ PAGE ERROR: [Error [SyntaxError]: missing ) after argument list]
+
+⏳ Waiting 3 seconds for fetch to complete...
+📝 H1 content: Loading shop...
+❌ Error containers visible: 0
+📄 Content div HTML (first 300 chars): 
+      <!-- Will be populated by JavaScript -->
+```
+Full output: [`server-runs/2026-05-13T19-14-04-app-cat-tmp-debug-storefront-fetch.js-EOF-1.log`](server-runs/2026-05-13T19-14-04-app-cat-tmp-debug-storefront-fetch.js-EOF-1.log)
