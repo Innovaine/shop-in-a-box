@@ -1356,3 +1356,25 @@ STDOUT:
 ✓ JavaScript syntax is valid
 ```
 Full output: [`server-runs/2026-05-13T19-15-11-app-cat-tmp-test-js-syntax.js-EOF-1.log`](server-runs/2026-05-13T19-15-11-app-cat-tmp-test-js-syntax.js-EOF-1.log)
+
+## 2026-05-13T19:15:33.770Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `a8c8b21` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 2321ms)
+```
+cd ~/shop-in-a-box && sed -n '/<script>/,/<\/script>/p' storefront.html > /tmp/storefront-script.js && node -c /tmp/storefront-script.js 2>&1 || echo "Script check failed"
+```
+STDOUT:
+```
+/tmp/storefront-script.js:1
+  <script>
+  ^
+
+SyntaxError: Unexpected token '<'
+    at wrapSafe (node:internal/modules/cjs/loader:1763:18)
+    at checkSyntax (node:internal/main/check_syntax:76:3)
+
+Node.js v24.15.0
+Script check failed
+```
+Full output: [`server-runs/2026-05-13T19-15-33-app-cd-shop-in-a-box-sed--n-script-script-p--1.log`](server-runs/2026-05-13T19-15-33-app-cd-shop-in-a-box-sed--n-script-script-p--1.log)
