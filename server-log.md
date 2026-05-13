@@ -1034,3 +1034,25 @@ Running 1 test using 1 worker
     tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ─────────────
 ```
 Full output: [`server-runs/2026-05-13T19-11-39-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-11-39-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
+
+## 2026-05-13T19:12:12.778Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `bc03042` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 6888ms)
+```
+cd ~/shop-in-a-box && git pull --ff-only && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers node tests/debug-storefront.js 2>&1
+```
+STDOUT:
+```
+Updating 70272e4..bc03042
+Fast-forward
+ server-log.md             | 260 ++++++++++++++++++++++++++++++++++++++++++++++
+ tests/debug-storefront.js |  43 ++++++++
+ 2 files changed, 303 insertions(+)
+ create mode 100644 tests/debug-storefront.js
+Created merchant: bb5c782e-266f-4577-ae89-2fbaa49bbd81
+Navigating to: http://localhost:3000/shop/bb5c782e-266f-4577-ae89-2fbaa49bbd81
+PAGE ERROR: missing ) after argument list
+H1 text: Loading shop...
+```
+Full output: [`server-runs/2026-05-13T19-12-12-app-cd-shop-in-a-box-git-pull---ff-only-PLAY-1.log`](server-runs/2026-05-13T19-12-12-app-cd-shop-in-a-box-git-pull---ff-only-PLAY-1.log)
