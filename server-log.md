@@ -1931,3 +1931,23 @@ STDOUT:
 #15 DONE 0.0s
 ```
 Full output: [`server-runs/2026-05-13T19-47-46-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-47-46-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
+
+## 2026-05-13T19:48:01.328Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `fe39b60` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 4230ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts 2>&1 | tail -60
+```
+STDOUT:
+```
+
+Running 1 test using 1 worker
+
+✓ Created test merchant: 3f5446e1-ce37-419b-a6b0-e5392d159f79
+✓ Storefront displays all 3 products correctly
+  ✓  1 tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly (198ms)
+
+  1 passed (870ms)
+```
+Full output: [`server-runs/2026-05-13T19-48-01-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-48-01-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
