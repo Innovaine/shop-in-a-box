@@ -1302,3 +1302,57 @@ STDOUT:
       <!-- Will be populated by JavaScript -->
 ```
 Full output: [`server-runs/2026-05-13T19-14-04-app-cat-tmp-debug-storefront-fetch.js-EOF-1.log`](server-runs/2026-05-13T19-14-04-app-cat-tmp-debug-storefront-fetch.js-EOF-1.log)
+
+## 2026-05-13T19:15:11.162Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `2745735` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 2957ms)
+```
+cat > /tmp/test-js-syntax.js << 'EOF'
+// Test if the JavaScript in storefront.html has a syntax error
+const testCode = `
+    function renderMerchant(data) {
+      const { shopName, description, items } = data;
+
+      document.getElementById('shop-name').textContent = shopName || 'Shop';
+      document.getElementById('shop-description').textContent = description || '';
+      document.title = shopName || 'Shop';
+
+      const content = document.getElementById('content');
+      if (!items || items.length === 0) {
+        content.innerHTML = '<p>No products</p>';
+        return;
+      }
+
+      const gridHtml = \`
+        <div class="grid">
+          \${items.map(item => \`
+            <div class="product-card" onclick="goToCheckout('\${item.id}', '\${data.id}')">
+              <div class="product-image">\${item.image ? \`<img src="\${item.image}" alt="\${item.name}" style="width:100%;height:100%;object-fit:cover;">\` : '📷'}</div>
+              <div class="product-info">
+                <div class="product-name" data-testid="product-name">\${item.name || 'Unnamed'}</div>
+                <div class="product-price" data-testid="product-price">\${((item.price || 0) / 100).toFixed(2)}</div>
+                <button class="btn btn-primary" data-testid="buy-button">Buy now</button>
+              </div>
+            </div>
+          \`).join('')}
+        </div>
+      \`;
+      content.innerHTML = gridHtml;
+    }
+`;
+
+try {
+  new Function(testCode);
+  console.log('✓ JavaScript syntax is valid');
+} catch (e) {
+  console.log('❌ Syntax error:', e.message);
+}
+EOF
+node /tmp/test-js-syntax.js
+```
+STDOUT:
+```
+✓ JavaScript syntax is valid
+```
+Full output: [`server-runs/2026-05-13T19-15-11-app-cat-tmp-test-js-syntax.js-EOF-1.log`](server-runs/2026-05-13T19-15-11-app-cat-tmp-test-js-syntax.js-EOF-1.log)
