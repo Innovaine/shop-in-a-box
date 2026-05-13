@@ -2298,3 +2298,12 @@ Created merchant: 6821561c-1088-4512-a77b-aa91fe3b95f3
       document.getElementById('total-price').textContent = `${(product.price || 0).toFixed(2)}`;
 ```
 Full output: [`server-runs/2026-05-13T19-58-54-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-58-54-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
+
+## 2026-05-13T19:59:44.213Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `b1a8e8b` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exec-error: SSH exec timeout (30000ms), 31718ms)
+```
+cd ~/shop-in-a-box && timeout 60 bash -c 'PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/merchant-upload.spec.ts --reporter=list > /tmp/upload-test.log 2>&1' && cat /tmp/upload-test.log
+```
+ERROR: SSH exec timeout (30000ms)
