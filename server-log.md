@@ -2081,3 +2081,48 @@ customer-name
 customer-name
 ```
 Full output: [`server-runs/2026-05-13T19-52-51-app-Create-a-merchant-then-test-if-checkout--1.log`](server-runs/2026-05-13T19-52-51-app-Create-a-merchant-then-test-if-checkout--1.log)
+
+## 2026-05-13T19:53:23.470Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `13a500f` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 2352ms)
+```
+cd ~/shop-in-a-box
+
+MERCHANT=$(curl -s -X POST http://localhost:3000/api/merchant/create \
+  -H "Content-Type: application/json" \
+  -d '{"shopName":"Test","category":"test","email":"t@t.com","items":[{"name":"Item","description":"D","price":10.00}]}')
+
+MERCHANT_ID=$(echo $MERCHANT | jq -r '.merchantId')
+
+# Get first item ID from merchant data
+curl -s "http://localhost:3000/api/merchant/$MERCHANT_ID" | jq '.items[0] | {id, name, price}'
+
+# Now try checkout with correct product ID
+curl -s "http://localhost:3000/api/merchant/$MERCHANT_ID" | jq -r '.items[0].id' | \
+  xargs -I {} curl -s "http://localhost:3000/checkout/$MERCHANT_ID?product={}" | grep -A 2 'error-message\|product-name'
+```
+STDOUT:
+```
+{
+  "id": "a1761cd8-f4f6-4b37-b054-7e4a595cabd2",
+  "name": "Item",
+  "price": 10
+}
+    .error-message {
+      background: #fadbd8;
+      border: 1px solid #f5b7b1;
+--
+          <span class="summary-label" id="product-name">Loading...</span>
+          <span class="summary-value">$0.00</span>
+        </div>
+--
+        <div class="error-message">
+          <strong>${title}</strong><br>${message}
+        </div>
+--
+      document.getElementById('product-name').textContent = product.name;
+      document.getElementById('total-price').textContent = `${(product.price || 0).toFixed(2)}`;
+      document.getElementById('loading-container').style.display = 'none';
+```
+Full output: [`server-runs/2026-05-13T19-53-23-app-cd-shop-in-a-box-1.log`](server-runs/2026-05-13T19-53-23-app-cd-shop-in-a-box-1.log)
