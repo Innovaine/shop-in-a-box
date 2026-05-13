@@ -1960,3 +1960,25 @@ _Pre-SSH: warehouse pushed to GitHub as commit `18dd405` so the server's `git pu
 cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/checkout.spec.ts 2>&1 | tail -60
 ```
 ERROR: SSH exec timeout (30000ms)
+
+## 2026-05-13T19:49:23.297Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `12c7821` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 4812ms)
+```
+cd ~/shop-in-a-box && curl -s -X POST http://localhost:3000/api/merchant/create -H "Content-Type: application/json" -d '{
+  "shopName": "Debug Shop",
+  "category": "test",
+  "email": "debug@test.com",
+  "items": [{"name": "Test Item", "description": "Test", "price": 10.00}]
+}' | jq -r '.shopUrl' | xargs -I {} bash -c 'curl -s {} | grep -i "buy\|checkout\|button" | head -5'
+```
+STDOUT:
+```
+          <button class="btn btn-secondary" onclick="window.location.href='/'">Back to home</button>
+            <div class="product-card" onclick="goToCheckout('${item.id}', '${data.id}')">
+                <button class="btn btn-primary" data-testid="buy-button">Buy now</button>
+    // Navigate to checkout
+    function goToCheckout(productId, merchantId) {
+```
+Full output: [`server-runs/2026-05-13T19-49-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-49-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
