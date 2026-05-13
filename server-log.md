@@ -451,3 +451,29 @@ drwxrwxr-x 9 tester tester 4096 May 13 18:47 ..
 drwxrwxr-x 2 tester tester 4096 May 13 18:47 web
 ```
 Full output: [`server-runs/2026-05-13T18-47-06-app-git-clone-https-github.com-Innovaine-sho-1.log`](server-runs/2026-05-13T18-47-06-app-git-clone-https-github.com-Innovaine-sho-1.log)
+
+## 2026-05-13T18:47:23.364Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `a059cb8` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 4488ms)
+```
+cd ~/shop-in-a-box && npm install -D @playwright/test 2>&1
+```
+STDOUT:
+```
+npm warn deprecated multer@1.4.5-lts.2: Multer 1.x is impacted by a number of vulnerabilities, which have been patched in 2.x. You should upgrade to the latest 2.x version.
+npm warn deprecated uuid@9.0.1: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+
+added 93 packages, and audited 94 packages in 2s
+
+18 packages are looking for funding
+  run `npm fund` for details
+
+1 high severity vulnerability
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+```
+Full output: [`server-runs/2026-05-13T18-47-23-app-cd-shop-in-a-box-npm-install--D-playwrig-1.log`](server-runs/2026-05-13T18-47-23-app-cd-shop-in-a-box-npm-install--D-playwrig-1.log)
