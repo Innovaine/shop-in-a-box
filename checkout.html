@@ -238,12 +238,13 @@
   </div>
 
   <script>
-    // Parse URL parameters
+    // Parse URL parameters (/checkout/:merchantId?product=xxx)
     function getQueryParams() {
       const params = new URLSearchParams(window.location.search);
+      const pathParts = window.location.pathname.split('/');
       return {
         productId: params.get('product'),
-        merchantId: params.get('merchant')
+        merchantId: pathParts[2] // /checkout/:merchantId -> index 2
       };
     }
 

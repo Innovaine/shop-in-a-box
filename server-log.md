@@ -726,3 +726,51 @@ STDOUT:
 }
 ```
 Full output: [`server-runs/2026-05-13T19-08-43-app-cd-shop-in-a-box-docker-compose-down-doc-1.log`](server-runs/2026-05-13T19-08-43-app-cd-shop-in-a-box-docker-compose-down-doc-1.log)
+
+## 2026-05-13T19:09:08.133Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `b83c0ca` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 9094ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts --reporter=list 2>&1 | tee /tmp/playwright-storefront-day2.log
+```
+STDOUT:
+```
+
+Running 1 test using 1 worker
+
+✓ Created test merchant: 7978a5c8-96a5-471e-9c13-74ae282c0768
+  ✘  1 tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly (5.1s)
+
+
+  1) tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('h1, h2')
+    Expected substring: [32m"Test Bakery"[39m
+    Received string:    [31m"Loading shop..."[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for locator('h1, h2')[22m
+    [2m    14 × locator resolved to <h1 id="shop-name">Loading shop...</h1>[22m
+    [2m       - unexpected value "Loading shop..."[22m
+
+
+      31 |   
+      32 |   // Check page title/header displays shop name
+    > 33 |   await expect(page.locator('h1, h2')).toContainText('Test Bakery');
+         |                                        ^
+      34 |   
+      35 |   // Verify all three products are displayed
+      36 |   const productCards = page.locator('[data-testid="product-card"], .product-item, .product');
+        at /home/engineer/shop-in-a-box/tests/web/storefront.spec.ts:33:40
+
+    Error Context: test-results/tests-web-storefront-store-d8d8d-merchant-products-correctly/error-context.md
+
+  1 failed
+    tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ─────────────
+```
+Full output: [`server-runs/2026-05-13T19-09-08-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-09-08-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)

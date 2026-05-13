@@ -245,10 +245,10 @@
   </div>
 
   <script>
-    // Get merchant ID from URL query parameter
+    // Get merchant ID from URL path (/shop/:merchantId)
     function getMerchantId() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get('merchant');
+      const pathParts = window.location.pathname.split('/');
+      const id = pathParts[2]; // /shop/:merchantId -> index 2
       if (!id) {
         showError(
           'No shop specified',
@@ -382,7 +382,7 @@
 
     // Navigate to checkout
     function goToCheckout(productId, merchantId) {
-      window.location.href = `/checkout.html?product=${productId}&merchant=${merchantId}`;
+      window.location.href = `/checkout/${merchantId}?product=${productId}`;
     }
 
     // Initialize
