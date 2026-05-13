@@ -1463,3 +1463,13 @@ _Pre-SSH: warehouse pushed to GitHub as commit `cbbe682` so the server's `git pu
 cd ~/shop-in-a-box && timeout 90 bash -c "PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/merchant-upload.spec.ts --reporter=list 2>&1"
 ```
 ERROR: SSH exec timeout (30000ms)
+
+## 2026-05-13T19:25:54.500Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `3a966de` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exec-error: Connection timed out, 12700ms)
+```
+cd ~/shop-in-a-box && nohup bash -c "PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/ --reporter=list > /tmp/test-run-day2.log 2>&1" &
+sleep 2 && echo "Tests running in background, check /tmp/test-run-day2.log"
+```
+ERROR: Connection timed out
