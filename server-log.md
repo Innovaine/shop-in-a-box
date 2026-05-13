@@ -1409,3 +1409,19 @@ _Pre-SSH: warehouse pushed to GitHub as commit `37e0242` so the server's `git pu
 cd ~/shop-in-a-box && git pull --ff-only && docker compose down && docker compose build && docker compose up -d && sleep 5 && curl -s http://localhost:3000/health | jq .
 ```
 ERROR: Connection timed out
+
+## 2026-05-13T19:20:53.472Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `511c21f` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 3100ms)
+```
+cd ~/shop-in-a-box && git pull --ff-only
+```
+STDOUT:
+```
+Updating 37e0242..511c21f
+Fast-forward
+ server-log.md | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+```
+Full output: [`server-runs/2026-05-13T19-20-53-app-cd-shop-in-a-box-git-pull---ff-only-1.log`](server-runs/2026-05-13T19-20-53-app-cd-shop-in-a-box-git-pull---ff-only-1.log)
