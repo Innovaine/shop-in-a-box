@@ -403,3 +403,12 @@ _Pre-SSH: warehouse pushed to GitHub as commit `233968d` so the server's `git pu
 cd ~/shop-in-a-box && npm install -D @playwright/test
 ```
 ERROR: command exited 1
+
+## 2026-05-13T18:46:11.438Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `46efdcf` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exit 1, 2388ms)
+```
+cd ~/shop-in-a-box && git pull && ls -la tests/
+```
+ERROR: command exited 1
