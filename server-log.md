@@ -903,3 +903,78 @@ Running 1 test using 1 worker
 ```
 ERROR: command exited 1
 Full output: [`server-runs/2026-05-13T19-10-44-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-10-44-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
+
+## 2026-05-13T19:11:09.744Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `d9252ea` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 2656ms)
+```
+cd ~/shop-in-a-box && cat > /tmp/test_debug.sh << 'EOF'
+#!/bin/bash
+# Create test merchant
+RESPONSE=$(curl -s -X POST http://localhost:3000/api/merchant/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shopName": "Debug Bakery",
+    "category": "bakery",
+    "email": "debug@example.com",
+    "items": [{"name": "Test Cake", "description": "Yummy", "price": 25.00}]
+  }')
+
+echo "=== CREATE RESPONSE ==="
+echo "$RESPONSE" | jq .
+
+MERCHANT_ID=$(echo "$RESPONSE" | jq -r '.merchantId')
+echo ""
+echo "MERCHANT_ID: $MERCHANT_ID"
+
+# Get merchant data
+echo ""
+echo "=== GET MERCHANT DATA ==="
+curl -s "http://localhost:3000/api/merchant/$MERCHANT_ID" | jq .
+
+# Test storefront HTML
+echo ""
+echo "=== FETCH STOREFRONT HTML ==="
+curl -s "http://localhost:3000/shop/$MERCHANT_ID" | grep -E "<title>|shop-name|getMerchantId"
+EOF
+chmod +x /tmp/test_debug.sh && /tmp/test_debug.sh
+```
+STDOUT:
+```
+=== CREATE RESPONSE ===
+{
+  "success": true,
+  "merchantId": "137ef8ea-b123-44ee-af4f-f1a57c3b1316",
+  "shopUrl": "http://localhost:3000/shop/137ef8ea-b123-44ee-af4f-f1a57c3b1316"
+}
+
+MERCHANT_ID: 137ef8ea-b123-44ee-af4f-f1a57c3b1316
+
+=== GET MERCHANT DATA ===
+{
+  "id": "137ef8ea-b123-44ee-af4f-f1a57c3b1316",
+  "shopName": "Debug Bakery",
+  "category": "bakery",
+  "items": [
+    {
+      "id": "5bd81a59-b043-4423-9826-fba66aca9380",
+      "name": "Test Cake",
+      "description": "Yummy",
+      "price": 25,
+      "image": null,
+      "addedAt": "2026-05-13T19:11:09.663Z"
+    }
+  ],
+  "email": "debug@example.com",
+  "createdAt": "2026-05-13T19:11:09.663Z"
+}
+
+=== FETCH STOREFRONT HTML ===
+  <title>Shop</title>
+      <h1 id="shop-name">Loading shop...</h1>
+    function getMerchantId() {
+      document.getElementById('shop-name').textContent = shopName || 'Shop';
+    const merchantId = getMerchantId();
+```
+Full output: [`server-runs/2026-05-13T19-11-09-app-cd-shop-in-a-box-cat-tmp-test_debug.sh-E-1.log`](server-runs/2026-05-13T19-11-09-app-cd-shop-in-a-box-cat-tmp-test_debug.sh-E-1.log)
