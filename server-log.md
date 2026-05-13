@@ -120,3 +120,45 @@ STDOUT:
 Cloning into 'shop-in-a-box'...
 ```
 Full output: [`server-runs/2026-05-13T18-41-59-app-cd-git-clone-https-github.com-Innovaine--1.log`](server-runs/2026-05-13T18-41-59-app-cd-git-clone-https-github.com-Innovaine--1.log)
+
+## 2026-05-13T18:42:12.325Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `ec959eb` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 3101ms)
+```
+cd ~/shop-in-a-box && docker compose build 2>&1 | tail -30
+```
+STDOUT:
+```
+#8 CACHED
+
+#9 [2/8] WORKDIR /app
+#9 CACHED
+
+#10 [6/8] COPY *.html ./
+#10 CACHED
+
+#11 [4/8] RUN npm install --production
+#11 CACHED
+
+#12 [5/8] COPY src/ ./src/
+#12 CACHED
+
+#13 [8/8] COPY *.svg ./
+#13 CACHED
+
+#14 exporting to image
+#14 exporting layers done
+#14 exporting manifest sha256:f447d60a1af7ccc9c9103d104b6261e759a7be048d8fec8bdcb32478e1053de0 done
+#14 exporting config sha256:8fa653e99c3774972067084bafdb1a15ec8655136f35535085d0d69eadd3bb64 done
+#14 exporting attestation manifest sha256:b9c86725d55dd3cfda1ec3787573b832763dd3be5d9061290a52b841a919381f 0.0s done
+#14 exporting manifest list sha256:c9f50908c477f349cde4237f354d05284277257d25722e9a79c9e8dec187f89b done
+#14 naming to docker.io/library/shop-in-a-box-app:latest done
+#14 unpacking to docker.io/library/shop-in-a-box-app:latest done
+#14 DONE 0.1s
+
+#15 resolving provenance for metadata file
+#15 DONE 0.0s
+ Image shop-in-a-box-app Built
+```
+Full output: [`server-runs/2026-05-13T18-42-12-app-cd-shop-in-a-box-docker-compose-build-2--1.log`](server-runs/2026-05-13T18-42-12-app-cd-shop-in-a-box-docker-compose-build-2--1.log)
