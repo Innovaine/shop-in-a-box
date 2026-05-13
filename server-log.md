@@ -652,3 +652,77 @@ STDOUT:
  create mode 100644 validation-checklist.md
 ```
 Full output: [`server-runs/2026-05-13T19-08-19-app-cd-shop-in-a-box-git-pull---ff-only-1.log`](server-runs/2026-05-13T19-08-19-app-cd-shop-in-a-box-git-pull---ff-only-1.log)
+
+## 2026-05-13T19:08:43.188Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `709ab31` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 7873ms)
+```
+cd ~/shop-in-a-box && docker compose down && docker compose build && docker compose up -d && sleep 3 && curl -s http://localhost:3000/health | jq .
+```
+STDOUT:
+```
+#1 [internal] load local bake definitions
+#1 reading from stdin 508B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 331B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/8] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#5 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 114.11kB done
+#6 DONE 0.0s
+
+#7 [3/8] COPY package*.json ./
+#7 CACHED
+
+#8 [2/8] WORKDIR /app
+#8 CACHED
+
+#9 [4/8] RUN npm install --production
+#9 CACHED
+
+#10 [5/8] COPY src/ ./src/
+#10 CACHED
+
+#11 [6/8] COPY *.html ./
+#11 DONE 0.0s
+
+#12 [7/8] COPY *.txt ./
+#12 DONE 0.0s
+
+#13 [8/8] COPY *.svg ./
+#13 DONE 0.0s
+
+#14 exporting to image
+#14 exporting layers 0.0s done
+#14 exporting manifest sha256:182b7ccaab3c0f8dc43b32fc58268e9b81984943052c2b738ec542b477ffe8d6 done
+#14 exporting config sha256:78eccf28526cbd6e549508c3f07efbe39c5eca24d48b2e3acaac3c862272b252 done
+#14 exporting attestation manifest sha256:2607d419f218b8615561468118f294b5b81a15ea5184b2d5c7192ffdd8d7634a 0.0s done
+#14 exporting manifest list sha256:a4c75dc367f4be8813f6e161b470888248aff6ffeea78d55b3229b7a2acf2552 done
+#14 naming to docker.io/library/shop-in-a-box-app:latest done
+#14 unpacking to docker.io/library/shop-in-a-box-app:latest 0.0s done
+#14 DONE 0.1s
+
+#15 resolving provenance for metadata file
+#15 DONE 0.0s
+{
+  "status": "ok",
+  "timestamp": "2026-05-13T19:08:42.856Z",
+  "merchants": 0,
+  "orders": 0
+}
+```
+Full output: [`server-runs/2026-05-13T19-08-43-app-cd-shop-in-a-box-docker-compose-down-doc-1.log`](server-runs/2026-05-13T19-08-43-app-cd-shop-in-a-box-docker-compose-down-doc-1.log)
