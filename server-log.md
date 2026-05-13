@@ -1982,3 +1982,20 @@ STDOUT:
     function goToCheckout(productId, merchantId) {
 ```
 Full output: [`server-runs/2026-05-13T19-49-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-49-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
+
+## 2026-05-13T19:49:51.395Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `c00844a` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 4803ms)
+```
+cd ~/shop-in-a-box && curl -s -X POST http://localhost:3000/api/merchant/create -H "Content-Type: application/json" -d '{"shopName":"Test", "category":"test", "email":"test@test.com", "items":[{"name":"Test", "description":"Test", "price":10}]}' | jq .
+```
+STDOUT:
+```
+{
+  "success": true,
+  "merchantId": "958ec930-d19b-4efa-81fc-f080d8902b35",
+  "shopUrl": "http://localhost:3000/shop/958ec930-d19b-4efa-81fc-f080d8902b35"
+}
+```
+Full output: [`server-runs/2026-05-13T19-49-51-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-49-51-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
