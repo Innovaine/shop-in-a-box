@@ -2149,3 +2149,42 @@ STDOUT:
 94d6636652f1   shop-in-a-box-app           "docker-entrypoint.s…"   7 minutes ago   Up 7 minutes (unhealthy)   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp   shop-in-a-box-app-1
 ```
 Full output: [`server-runs/2026-05-13T19-54-51-app-curl--s-http-localhost-3000-health-echo--1.log`](server-runs/2026-05-13T19-54-51-app-curl--s-http-localhost-3000-health-echo--1.log)
+
+## 2026-05-13T19:56:11.090Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `d18f1d7` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 3523ms)
+```
+cd ~/shop-in-a-box && git pull --ff-only && docker compose ps && curl -s http://localhost:3000/health | jq .
+```
+STDOUT:
+```
+Updating 511c21f..d18f1d7
+Fast-forward
+ checkout.html                 |   6 +-
+ day-02/_index.md              |  30 ++
+ day-02/test.md                | 123 +++++++
+ day-03/_plan.md               |  36 ++
+ day-03/engineering.md         | 317 ++++++++++++++++++
+ day-03/review.md              | 236 ++++++++++++++
+ server-log.md                 | 740 ++++++++++++++++++++++++++++++++++++++++++
+ storefront.html               |  10 +-
+ test-results/day-02/report.md | 164 ++++++++++
+ tests/web/storefront.spec.ts  |  15 +-
+ 10 files changed, 1660 insertions(+), 17 deletions(-)
+ create mode 100644 day-02/_index.md
+ create mode 100644 day-02/test.md
+ create mode 100644 day-03/_plan.md
+ create mode 100644 day-03/engineering.md
+ create mode 100644 day-03/review.md
+ create mode 100644 test-results/day-02/report.md
+NAME                  IMAGE               COMMAND                  SERVICE   CREATED         STATUS                     PORTS
+shop-in-a-box-app-1   shop-in-a-box-app   "docker-entrypoint.s…"   app       8 minutes ago   Up 8 minutes (unhealthy)   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+{
+  "status": "ok",
+  "timestamp": "2026-05-13T19:56:10.912Z",
+  "merchants": 7,
+  "orders": 0
+}
+```
+Full output: [`server-runs/2026-05-13T19-56-11-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-56-11-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
