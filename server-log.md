@@ -2217,3 +2217,66 @@ _Pre-SSH: warehouse pushed to GitHub as commit `216f384` so the server's `git pu
 cd ~/shop-in-a-box && timeout 60 bash -c 'PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/checkout.spec.ts --reporter=list > /tmp/checkout-test.log 2>&1' && cat /tmp/checkout-test.log
 ```
 ERROR: command exited 1
+
+## 2026-05-13T19:58:27.797Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `4b61022` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2479ms) _(showing tail — full 2,330B stdout + 0B stderr)_
+```
+cat /tmp/checkout-test.log
+```
+STDOUT:
+```
+…fields (30.0s)
+
+
+  1) tests/web/checkout.spec.ts:5:5 › customer can complete checkout and receive order confirmation 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('text=$22')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('text=$22')[22m
+
+
+      36 |   // Verify product details are shown
+      37 |   await expect(page.locator('text=Handmade Mug')).toBeVisible();
+    > 38 |   await expect(page.locator('text=$22')).toBeVisible();
+         |                                          ^
+      39 |   
+      40 |   // Fill in customer details
+      41 |   await page.fill('input[name="customerName"]', 'Test Customer');
+        at /home/engineer/shop-in-a-box/tests/web/checkout.spec.ts:38:42
+
+    Error Context: test-results/tests-web-checkout-custome-27a10--receive-order-confirmation/error-context.md
+
+  2) tests/web/checkout.spec.ts:69:5 › checkout validates required customer fields ─────────────────
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button[type="submit"]:has-text("Place Order")')[22m
+
+
+      88 |   
+      89 |   // Try to submit without filling fields
+    > 90 |   await page.click('button[type="submit"]:has-text("Place Order")');
+         |              ^
+      91 |   
+      92 |   // Browser should show HTML5 validation or custom error
+      93 |   // Check if form hasn't navigated away (still on checkout page)
+        at /home/engineer/shop-in-a-box/tests/web/checkout.spec.ts:90:14
+
+    Error Context: test-results/tests-web-checkout-checkou-9a875-es-required-customer-fields/error-context.md
+
+  2 failed
+    tests/web/checkout.spec.ts:5:5 › customer can complete checkout and receive order confirmation ─
+    tests/web/checkout.spec.ts:69:5 › checkout validates required customer fields ──────────────────
+```
+Full output: [`server-runs/2026-05-13T19-58-27-app-cat-tmp-checkout-test.log-1.log`](server-runs/2026-05-13T19-58-27-app-cat-tmp-checkout-test.log-1.log)
