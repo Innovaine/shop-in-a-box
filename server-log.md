@@ -306,3 +306,63 @@ STDOUT:
 ORDER_ID: 3dfabf8e-9c7b-4a53-a353-ee2687a59159
 ```
 Full output: [`server-runs/2026-05-13T18-43-13-app-cd-shop-in-a-box-cat-tmp-test_order.sh-E-1.log`](server-runs/2026-05-13T18-43-13-app-cd-shop-in-a-box-cat-tmp-test_order.sh-E-1.log)
+
+## 2026-05-13T18:43:36.045Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `6e496d2` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 2504ms)
+```
+cd ~/shop-in-a-box && cat > /tmp/test_pages.sh << 'EOF'
+#!/bin/bash
+
+echo "=== Testing static HTML pages ==="
+
+echo ""
+echo "GET /upload (merchant upload page):"
+curl -s -I http://localhost:3000/upload | head -5
+
+echo ""
+echo "GET /shop/:merchantId (storefront page):"
+curl -s -I http://localhost:3000/shop/2f2dee61-2542-4456-8098-be8d249e5a40 | head -5
+
+echo ""
+echo "GET /checkout/:merchantId (checkout page):"
+curl -s -I http://localhost:3000/checkout/2f2dee61-2542-4456-8098-be8d249e5a40 | head -5
+
+echo ""
+echo "Verifying upload.html is served correctly:"
+curl -s http://localhost:3000/upload | head -20 | grep -i "title\|form\|upload"
+
+EOF
+chmod +x /tmp/test_pages.sh
+/tmp/test_pages.sh
+```
+STDOUT:
+```
+=== Testing static HTML pages ===
+
+GET /upload (merchant upload page):
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Wed, 13 May 2026 18:40:14 GMT
+
+GET /shop/:merchantId (storefront page):
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Wed, 13 May 2026 18:40:14 GMT
+
+GET /checkout/:merchantId (checkout page):
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Wed, 13 May 2026 18:40:14 GMT
+
+Verifying upload.html is served correctly:
+  <title>Shop-in-a-Box — Merchant Upload</title>
+```
+Full output: [`server-runs/2026-05-13T18-43-36-app-cd-shop-in-a-box-cat-tmp-test_pages.sh-E-1.log`](server-runs/2026-05-13T18-43-36-app-cd-shop-in-a-box-cat-tmp-test_pages.sh-E-1.log)
