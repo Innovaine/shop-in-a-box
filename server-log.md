@@ -2026,3 +2026,58 @@ _Pre-SSH: warehouse pushed to GitHub as commit `a7fc9a8` so the server's `git pu
 cd ~/shop-in-a-box && timeout 30 npx playwright test tests/web/merchant-upload.spec.ts 2>&1 | tail -40
 ```
 ERROR: SSH exec timeout (30000ms)
+
+## 2026-05-13T19:52:51.683Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `309e6a6` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 3687ms)
+```
+# Create a merchant, then test if checkout page can be accessed and rendered
+cd ~/shop-in-a-box
+
+MERCHANT=$(curl -s -X POST http://localhost:3000/api/merchant/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shopName": "Checkout Test",
+    "category": "test",
+    "email": "test@test.com",
+    "items": [{"name": "Test Item", "description": "A test", "price": 15.00}]
+  }')
+
+MERCHANT_ID=$(echo $MERCHANT | jq -r '.merchantId')
+echo "✓ Created merchant: $MERCHANT_ID"
+
+# Get the storefront to see the structure
+echo ""
+echo "Testing storefront..."
+curl -s "http://localhost:3000/shop/$MERCHANT_ID" | grep -o "product-card\|product-name\|product-price\|buy-button" | head -10
+
+echo ""
+echo "Testing checkout page HTML..."
+PRODUCT_ID="item-1"  # From API response structure, items should have IDs
+curl -s "http://localhost:3000/checkout/$MERCHANT_ID?product=$PRODUCT_ID" | grep -o "error-message\|checkout-form\|customer-name" | head -5
+```
+STDOUT:
+```
+✓ Created merchant: 0281a5fa-bb72-4ee4-87eb-3b791b43fcd2
+
+Testing storefront...
+product-card
+product-card
+product-name
+product-price
+product-card
+product-name
+product-name
+product-price
+product-price
+buy-button
+
+Testing checkout page HTML...
+error-message
+checkout-form
+customer-name
+customer-name
+customer-name
+```
+Full output: [`server-runs/2026-05-13T19-52-51-app-Create-a-merchant-then-test-if-checkout--1.log`](server-runs/2026-05-13T19-52-51-app-Create-a-merchant-then-test-if-checkout--1.log)
