@@ -1814,3 +1814,16 @@ _Pre-SSH: warehouse pushed to GitHub as commit `07fa811` so the server's `git pu
 cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/merchant-upload.spec.ts --reporter=list
 ```
 ERROR: SSH exec timeout (30000ms)
+
+## 2026-05-13T19:46:07.005Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `cfee5f0` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 2895ms)
+```
+cd ~/shop-in-a-box && curl -s http://localhost:3000/health | head -20
+```
+STDOUT:
+```
+{"status":"ok","timestamp":"2026-05-13T19:46:06.890Z","merchants":5,"orders":0}
+```
+Full output: [`server-runs/2026-05-13T19-46-06-app-cd-shop-in-a-box-curl--s-http-localhost--1.log`](server-runs/2026-05-13T19-46-06-app-cd-shop-in-a-box-curl--s-http-localhost--1.log)
