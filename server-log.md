@@ -1532,3 +1532,80 @@ STDOUT:
       document.getElementById('shop-name').textContent = shopName || 'Shop';
 ```
 Full output: [`server-runs/2026-05-13T19-30-11-app-curl--s-http-localhost-3000-shop-00ec20f-1.log`](server-runs/2026-05-13T19-30-11-app-curl--s-http-localhost-3000-shop-00ec20f-1.log)
+
+## 2026-05-13T19:40:38.126Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `832fcc1` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 8010ms) _(showing tail — full 2,512B stdout + 0B stderr)_
+```
+cd ~/shop-in-a-box && git pull --ff-only && docker compose down && docker compose build && docker compose up -d
+```
+STDOUT:
+```
+…est-results/day-02/report.md | 164 ++++++++++++++
+ 9 files changed, 1534 insertions(+), 6 deletions(-)
+ create mode 100644 day-02/_index.md
+ create mode 100644 day-02/engineering.md
+ create mode 100644 day-02/review.md
+ create mode 100644 day-02/test.md
+ create mode 100644 day-03/_plan.md
+ create mode 100644 test-results/day-02/report.md
+#1 [internal] load local bake definitions
+#1 reading from stdin 508B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 331B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 22.48kB done
+#5 DONE 0.0s
+
+#6 [1/8] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#6 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+#6 DONE 0.0s
+
+#7 [3/8] COPY package*.json ./
+#7 CACHED
+
+#8 [4/8] RUN npm install --production
+#8 CACHED
+
+#9 [2/8] WORKDIR /app
+#9 CACHED
+
+#10 [5/8] COPY src/ ./src/
+#10 CACHED
+
+#11 [6/8] COPY *.html ./
+#11 DONE 0.0s
+
+#12 [7/8] COPY *.txt ./
+#12 DONE 0.0s
+
+#13 [8/8] COPY *.svg ./
+#13 DONE 0.0s
+
+#14 exporting to image
+#14 exporting layers 0.0s done
+#14 exporting manifest sha256:d5e6153339042dbbd464b17a9c40489e42ab6be5754c8eeae6a4060c76dfbc4e done
+#14 exporting config sha256:b1aa3c5ffbbb5679bacdcc822cb6c85a4c9930f35d2cd76cce19c307eeeac1c4 done
+#14 exporting attestation manifest sha256:a967549c6227811901fe91226f546619ee5cb353309652ecfcbbd10e0ca7426b done
+#14 exporting manifest list sha256:7a8f8d8bf81852ec93764840db241da18c69dcfb817d920bff8570cbdd1d4ee3 done
+#14 naming to docker.io/library/shop-in-a-box-app:latest done
+#14 unpacking to docker.io/library/shop-in-a-box-app:latest
+#14 unpacking to docker.io/library/shop-in-a-box-app:latest 0.3s done
+#14 DONE 0.4s
+
+#15 resolving provenance for metadata file
+#15 DONE 0.0s
+```
+Full output: [`server-runs/2026-05-13T19-40-38-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-40-38-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
