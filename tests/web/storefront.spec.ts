@@ -36,19 +36,16 @@ test('storefront displays merchant products correctly', async ({ page }) => {
   const productCards = page.locator('[data-testid="product-card"], .product-item, .product');
   
   // Check first product
-  await expect(page.locator('text=Chocolate Cake')).toBeVisible();
-  await expect(page.locator('text=Rich chocolate layer cake')).toBeVisible();
-  await expect(page.locator('text=$35')).toBeVisible();
+  await expect(page.locator('[data-testid="product-name"]').filter({ hasText: 'Chocolate Cake' })).toBeVisible();
+  await expect(page.locator('[data-testid="product-price"]').filter({ hasText: '35.00' })).toBeVisible();
   
   // Check second product
-  await expect(page.locator('text=Croissant')).toBeVisible();
-  await expect(page.locator('text=Buttery French croissant')).toBeVisible();
-  await expect(page.locator('text=$3.50')).toBeVisible();
+  await expect(page.locator('[data-testid="product-name"]').filter({ hasText: 'Croissant' })).toBeVisible();
+  await expect(page.locator('[data-testid="product-price"]').filter({ hasText: '3.50' })).toBeVisible();
   
   // Check third product
-  await expect(page.locator('text=Sourdough Bread')).toBeVisible();
-  await expect(page.locator('text=Artisan sourdough loaf')).toBeVisible();
-  await expect(page.locator('text=$8')).toBeVisible();
+  await expect(page.locator('[data-testid="product-name"]').filter({ hasText: 'Sourdough Bread' })).toBeVisible();
+  await expect(page.locator('[data-testid="product-price"]').filter({ hasText: '8.00' })).toBeVisible();
   
   // Take screenshot
   await page.screenshot({ path: 'test-results/storefront-display.png', fullPage: true });

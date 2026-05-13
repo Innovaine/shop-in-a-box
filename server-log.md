@@ -1609,3 +1609,50 @@ STDOUT:
 #15 DONE 0.0s
 ```
 Full output: [`server-runs/2026-05-13T19-40-38-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-40-38-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
+
+## 2026-05-13T19:41:14.191Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `a4938f8` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✗ exit 1, 12379ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts --reporter=list
+```
+STDOUT:
+```
+
+Running 1 test using 1 worker
+
+✓ Created test merchant: 2fbb846a-ecc1-476f-a2ac-81af1f297c48
+  ✘  1 tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly (5.1s)
+
+
+  1) tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('text=Rich chocolate layer cake')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('text=Rich chocolate layer cake')[22m
+
+
+      38 |   // Check first product
+      39 |   await expect(page.locator('text=Chocolate Cake')).toBeVisible();
+    > 40 |   await expect(page.locator('text=Rich chocolate layer cake')).toBeVisible();
+         |                                                                ^
+      41 |   await expect(page.locator('text=$35')).toBeVisible();
+      42 |   
+      43 |   // Check second product
+        at /home/engineer/shop-in-a-box/tests/web/storefront.spec.ts:40:64
+
+    Error Context: test-results/tests-web-storefront-store-d8d8d-merchant-products-correctly/error-context.md
+
+  1 failed
+    tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ─────────────
+```
+ERROR: command exited 1
+Full output: [`server-runs/2026-05-13T19-41-14-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-41-14-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
