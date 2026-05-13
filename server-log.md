@@ -774,3 +774,83 @@ Running 1 test using 1 worker
     tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ─────────────
 ```
 Full output: [`server-runs/2026-05-13T19-09-08-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-09-08-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
+
+## 2026-05-13T19:10:03.821Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `70272e4` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 7918ms)
+```
+cd ~/shop-in-a-box && git pull --ff-only && docker compose build && docker compose up -d && sleep 3 && curl -s http://localhost:3000/health | jq .
+```
+STDOUT:
+```
+Updating 0d87122..70272e4
+Fast-forward
+ checkout.html   |   5 +-
+ server-log.md   | 178 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ storefront.html |   8 +--
+ 3 files changed, 185 insertions(+), 6 deletions(-)
+#1 [internal] load local bake definitions
+#1 reading from stdin 508B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 331B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 22.47kB done
+#5 DONE 0.0s
+
+#6 [1/8] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#6 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+#6 DONE 0.0s
+
+#7 [4/8] RUN npm install --production
+#7 CACHED
+
+#8 [3/8] COPY package*.json ./
+#8 CACHED
+
+#9 [2/8] WORKDIR /app
+#9 CACHED
+
+#10 [5/8] COPY src/ ./src/
+#10 CACHED
+
+#11 [6/8] COPY *.html ./
+#11 DONE 0.0s
+
+#12 [7/8] COPY *.txt ./
+#12 DONE 0.0s
+
+#13 [8/8] COPY *.svg ./
+#13 DONE 0.0s
+
+#14 exporting to image
+#14 exporting layers 0.0s done
+#14 exporting manifest sha256:8704d53da4d9d6af98d526fde330fedd24bb3b3e070cef36ba82126650c3b5c0 done
+#14 exporting config sha256:6e6029eb6b2bf5f0160997a8803fd264217ae4293f0481e7f13d7b769d883aa6 done
+#14 exporting attestation manifest sha256:40667a67230391b46776ea0a64ecafe8242d7e12ba325a874b1f590e74d045ce 0.0s done
+#14 exporting manifest list sha256:c828627f48e6cad16028a1ddbc50af88e2ea9f8340517e3cd8c03c875c2b68b3 done
+#14 naming to docker.io/library/shop-in-a-box-app:latest done
+#14 unpacking to docker.io/library/shop-in-a-box-app:latest 0.0s done
+#14 DONE 0.1s
+
+#15 resolving provenance for metadata file
+#15 DONE 0.0s
+{
+  "status": "ok",
+  "timestamp": "2026-05-13T19:10:03.750Z",
+  "merchants": 0,
+  "orders": 0
+}
+```
+Full output: [`server-runs/2026-05-13T19-10-03-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-10-03-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
