@@ -579,3 +579,20 @@ drwxrwxr-x  2 tester tester 4096 May 13 18:49 tests-web-checkout-checkou-9a875-e
 drwxrwxr-x  2 tester tester 4096 May 13 18:49 tests-web-checkout-custome-27a10--receive-order-confirmation
 ```
 Full output: [`server-runs/2026-05-13T18-50-16-app-cd-shop-in-a-box-ls--la-test-results-fin-1.log`](server-runs/2026-05-13T18-50-16-app-cd-shop-in-a-box-ls--la-test-results-fin-1.log)
+
+## 2026-05-13T18:50:39.354Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `3eeef14` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 3055ms)
+```
+cat /tmp/playwright-checkout.log 2>/dev/null | tail -100
+```
+STDOUT:
+```
+
+Running 2 tests using 1 worker
+
+✓ Created test merchant: 13dfd6c0-6323-46a2-92f5-a04e61b6c8ab
+  ✘  1 tests/web/checkout.spec.ts:5:5 › customer can complete checkout and receive order confirmation (5.2s)
+```
+Full output: [`server-runs/2026-05-13T18-50-39-app-cat-tmp-playwright-checkout.log-2-dev-nu-1.log`](server-runs/2026-05-13T18-50-39-app-cat-tmp-playwright-checkout.log-2-dev-nu-1.log)
