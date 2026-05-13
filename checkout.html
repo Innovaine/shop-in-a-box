@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout — Bloom & Stem</title>
+  <title>Checkout</title>
   <style>
+    :root {
+      --color-primary: #2c3e50;
+      --color-accent: #e74c3c;
+      --color-border: #ecf0f1;
+      --color-bg: #fafafa;
+      --color-text: #2c3e50;
+      --color-success: #27ae60;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --type-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -12,551 +27,375 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background: #f9fafb;
-      color: #1f2937;
-      line-height: 1.5;
+      font-family: var(--type-sans);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
     }
 
     .container {
       max-width: 600px;
       margin: 0 auto;
-      padding: 24px 16px;
-      background: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      padding: var(--spacing-lg);
     }
 
     .header {
-      margin-bottom: 32px;
-      text-align: left;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 16px;
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
     }
 
     .header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .header p {
-      font-size: 14px;
-      color: #6b7280;
-    }
-
-    .merchant-name {
+      font-size: 24px;
       font-weight: 600;
-      color: #059669;
+      color: var(--color-primary);
     }
 
-    .product-summary {
-      background: #f3f4f6;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 24px;
+    .order-summary {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
     }
 
-    .product-row {
+    .summary-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
+      font-size: 14px;
     }
 
-    .product-row:last-child {
+    .summary-row:last-child {
       margin-bottom: 0;
-      padding-top: 12px;
-      border-top: 1px solid #d1d5db;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--spacing-md);
+      margin-top: var(--spacing-md);
     }
 
-    .product-name {
-      font-size: 14px;
+    .summary-label {
+      color: #7f8c8d;
+    }
+
+    .summary-value {
       font-weight: 600;
+      color: var(--color-primary);
     }
 
-    .product-price {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1f2937;
-    }
-
-    .product-qty {
-      font-size: 13px;
-      color: #6b7280;
-    }
-
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .summary-total .summary-value {
       font-size: 16px;
-      font-weight: 700;
-    }
-
-    .total-label {
-      color: #374151;
-    }
-
-    .total-price {
-      color: #059669;
+      color: var(--color-accent);
     }
 
     .form-section {
-      margin-bottom: 24px;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
     }
 
-    .form-label {
+    .form-section h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
       display: block;
       font-size: 13px;
       font-weight: 600;
-      color: #374151;
-      margin-bottom: 6px;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
     }
 
-    .form-label .required {
-      color: #dc2626;
-    }
-
-    .form-input-group {
-      position: relative;
-      margin-bottom: 4px;
-    }
-
-    .form-input {
+    input[type="text"],
+    input[type="email"],
+    select {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
+      padding: 10px 12px;
       font-size: 14px;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      border: 1px solid var(--color-border);
+      border-radius: 3px;
+      font-family: var(--type-sans);
+      transition: border-color 0.2s ease;
     }
 
-    .form-input:focus {
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    .form-input.error {
-      border-color: #dc2626;
-    }
-
-    .form-input.error:focus {
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-    }
-
-    .form-error {
-      font-size: 12px;
-      color: #dc2626;
-      margin-top: 4px;
-      display: none;
-    }
-
-    .form-error.show {
-      display: block;
-    }
-
-    .quantity-control {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .qty-btn {
-      width: 36px;
-      height: 36px;
-      border: 1px solid #d1d5db;
-      background: white;
-      border-radius: 4px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      color: #374151;
-      transition: all 0.2s;
-    }
-
-    .qty-btn:hover:not(:disabled) {
-      background: #f3f4f6;
-      border-color: #9ca3af;
-    }
-
-    .qty-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .qty-input {
-      width: 60px;
-      text-align: center;
-      padding: 8px;
-      border: 1px solid #d1d5db;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .qty-display {
-      font-size: 14px;
-      font-weight: 600;
-      width: 60px;
-      text-align: center;
-    }
-
-    .stripe-element {
-      padding: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
-      background: white;
-    }
-
-    .form-banner {
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin-bottom: 16px;
-      font-size: 13px;
-      display: none;
-      border-left: 4px solid transparent;
-    }
-
-    .form-banner.show {
-      display: block;
-    }
-
-    .form-banner.error {
-      background: #fee2e2;
-      border-left-color: #dc2626;
-      color: #991b1b;
-    }
-
-    .form-banner.success {
-      background: #dcfce7;
-      border-left-color: #16a34a;
-      color: #166534;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 12px;
-      margin-top: 32px;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
     }
 
     .btn {
-      flex: 1;
-      padding: 14px 16px;
-      border-radius: 6px;
-      border: none;
+      width: 100%;
+      padding: 12px;
       font-size: 14px;
       font-weight: 600;
+      border: none;
+      border-radius: 3px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background 0.2s ease;
     }
 
     .btn-primary {
-      background: #059669;
+      background: var(--color-accent);
       color: white;
     }
 
     .btn-primary:hover:not(:disabled) {
-      background: #047857;
+      background: #c0392b;
     }
 
     .btn-primary:disabled {
-      background: #d1d5db;
-      color: #9ca3af;
+      background: #bdc3c7;
       cursor: not-allowed;
     }
 
-    .btn-secondary {
-      background: #e5e7eb;
-      color: #374151;
+    .error-message {
+      background: #fadbd8;
+      border: 1px solid #f5b7b1;
+      border-radius: 3px;
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      font-size: 13px;
+      color: #922b21;
     }
 
-    .btn-secondary:hover {
-      background: #d1d5db;
-    }
-
-    .spinner {
+    .loading-spinner {
       display: inline-block;
       width: 14px;
       height: 14px;
       border: 2px solid rgba(255, 255, 255, 0.3);
-      border-top-color: white;
+      border-top: 2px solid white;
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
-      margin-right: 6px;
     }
 
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-
-    .security-badge {
-      text-align: center;
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 16px;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 20px 16px;
-      }
-
-      .header h1 {
-        font-size: 24px;
-      }
-
-      .button-group {
-        flex-direction: column;
-      }
-    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <div class="header">
+      <h1>Checkout</h1>
+    </div>
 
-<div class="container">
+    <div id="error-container"></div>
 
-  <div class="header">
-    <h1>Checkout</h1>
-    <p>Shop at <span class="merchant-name">Bloom & Stem</span></p>
-  </div>
-
-  <div class="form-banner error" id="errorBanner"></div>
-
-  <!-- Product Summary -->
-  <div class="product-summary">
-    <div class="product-row">
-      <div>
-        <div class="product-name">Roses (12-stem)</div>
-        <div class="product-qty" id="qty-display">Qty: 1</div>
+    <form id="checkout-form" style="display: none;">
+      <div class="order-summary">
+        <div class="summary-row">
+          <span class="summary-label" id="product-name">Loading...</span>
+          <span class="summary-value">$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Quantity</span>
+          <span class="summary-value">1</span>
+        </div>
+        <div class="summary-row summary-total">
+          <span class="summary-label">Total</span>
+          <span class="summary-value" id="total-price">$0.00</span>
+        </div>
       </div>
-      <div class="product-price" id="unit-price">$49.99</div>
-    </div>
-    <div class="product-row">
-      <div class="total-label">Total</div>
-      <div class="total-price" id="total-price">$49.99</div>
-    </div>
-  </div>
 
-  <!-- Customer Name -->
-  <div class="form-section">
-    <label class="form-label">Full Name <span class="required">*</span></label>
-    <div class="form-input-group">
-      <input 
-        type="text" 
-        id="customerName" 
-        class="form-input" 
-        placeholder="Sarah Chen"
-        maxlength="100"
-      >
-      <div class="form-error" id="nameError"></div>
-    </div>
-  </div>
-
-  <!-- Customer Email -->
-  <div class="form-section">
-    <label class="form-label">Email <span class="required">*</span></label>
-    <div class="form-input-group">
-      <input 
-        type="email" 
-        id="customerEmail" 
-        class="form-input" 
-        placeholder="sarah@example.com"
-      >
-      <div class="form-error" id="emailError"></div>
-    </div>
-  </div>
-
-  <!-- Quantity -->
-  <div class="form-section">
-    <label class="form-label">Quantity <span class="required">*</span></label>
-    <div class="quantity-control">
-      <button class="qty-btn" id="qtyMinus" onclick="decrementQty()">−</button>
-      <div class="qty-display" id="qtyValue">1</div>
-      <button class="qty-btn" id="qtyPlus" onclick="incrementQty()">+</button>
-    </div>
-  </div>
-
-  <!-- Payment Info (Stripe placeholder) -->
-  <div class="form-section">
-    <label class="form-label">Payment <span class="required">*</span></label>
-    <div class="form-input-group">
-      <div class="stripe-element" id="stripeElement">
-        <p style="font-size: 13px; color: #9ca3af; margin: 0;">
-          [Stripe Card Element will mount here — test card: 4242 4242 4242 4242]
-        </p>
+      <div class="form-section">
+        <h2>Customer info</h2>
+        <div class="form-group">
+          <label for="customer-name">Full name</label>
+          <input type="text" id="customer-name" name="customerName" data-testid="customer-name" required placeholder="Alice Smith">
+        </div>
+        <div class="form-group">
+          <label for="customer-email">Email address</label>
+          <input type="email" id="customer-email" name="customerEmail" data-testid="customer-email" required placeholder="alice@example.com">
+        </div>
       </div>
-      <div class="form-error" id="stripeError"></div>
+
+      <button type="submit" class="btn btn-primary" id="submit-btn" data-testid="submit-order">
+        Complete purchase
+      </button>
+    </form>
+
+    <div id="loading-container" style="text-align: center; padding: 40px;">
+      <div class="loading-spinner"></div>
+      <p style="margin-top: 16px; font-size: 14px; color: #7f8c8d;">Loading product details...</p>
     </div>
   </div>
 
-  <!-- Submit -->
-  <div class="button-group">
-    <button class="btn btn-primary" id="submitBtn" onclick="submitCheckout()">
-      Complete Order
-    </button>
-    <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
-  </div>
-
-  <div class="security-badge">
-    🔒 Payments secured by Stripe
-  </div>
-
-</div>
-
-<script>
-  const PRODUCT_PRICE = 49.99;
-  let quantity = 1;
-  let isSubmitting = false;
-
-  // Quantity controls
-  function incrementQty() {
-    if (quantity < 99) {
-      quantity++;
-      updateQtyDisplay();
-    }
-  }
-
-  function decrementQty() {
-    if (quantity > 1) {
-      quantity--;
-      updateQtyDisplay();
-    }
-  }
-
-  function updateQtyDisplay() {
-    const qtyValue = document.getElementById('qtyValue');
-    const qtyDisplay = document.getElementById('qty-display');
-    const totalPrice = document.getElementById('total-price');
-    const qtyMinus = document.getElementById('qtyMinus');
-
-    qtyValue.textContent = quantity;
-    qtyDisplay.textContent = `Qty: ${quantity}`;
-    totalPrice.textContent = `$${(PRODUCT_PRICE * quantity).toFixed(2)}`;
-    qtyMinus.disabled = quantity === 1;
-  }
-
-  // Validation
-  function validateForm() {
-    const name = document.getElementById('customerName').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    const nameError = document.getElementById('nameError');
-    const emailError = document.getElementById('emailError');
-
-    let isValid = true;
-
-    // Name validation
-    if (!name) {
-      nameError.textContent = 'Name is required';
-      nameError.classList.add('show');
-      document.getElementById('customerName').classList.add('error');
-      isValid = false;
-    } else {
-      nameError.classList.remove('show');
-      document.getElementById('customerName').classList.remove('error');
+  <script>
+    // Parse URL parameters
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        productId: params.get('product'),
+        merchantId: params.get('merchant')
+      };
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-      emailError.textContent = 'Email is required';
-      emailError.classList.add('show');
-      document.getElementById('customerEmail').classList.add('error');
-      isValid = false;
-    } else if (!emailRegex.test(email)) {
-      emailError.textContent = 'Please enter a valid email (e.g., sarah@example.com)';
-      emailError.classList.add('show');
-      document.getElementById('customerEmail').classList.add('error');
-      isValid = false;
-    } else {
-      emailError.classList.remove('show');
-      document.getElementById('customerEmail').classList.remove('error');
+    // Show error and hide form
+    function showError(title, message) {
+      const errorContainer = document.getElementById('error-container');
+      errorContainer.innerHTML = `
+        <div class="error-message">
+          <strong>${title}</strong><br>${message}
+        </div>
+      `;
+      document.getElementById('loading-container').style.display = 'none';
+      document.getElementById('checkout-form').style.display = 'none';
     }
 
-    return isValid;
-  }
+    // Fetch product details
+    async function loadProduct(merchantId, productId) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-  // Real-time validation (blur)
-  document.getElementById('customerName').addEventListener('blur', function() {
-    const nameError = document.getElementById('nameError');
-    if (!this.value.trim()) {
-      nameError.textContent = 'Name is required';
-      nameError.classList.add('show');
-      this.classList.add('error');
-    } else {
-      nameError.classList.remove('show');
-      this.classList.remove('error');
-    }
-  });
+      try {
+        const response = await fetch(`/api/merchant/${merchantId}`, {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
 
-  document.getElementById('customerEmail').addEventListener('blur', function() {
-    const emailError = document.getElementById('emailError');
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!this.value.trim()) {
-      emailError.textContent = 'Email is required';
-      emailError.classList.add('show');
-      this.classList.add('error');
-    } else if (!emailRegex.test(this.value.trim())) {
-      emailError.textContent = 'Please enter a valid email';
-      emailError.classList.add('show');
-      this.classList.add('error');
-    } else {
-      emailError.classList.remove('show');
-      this.classList.remove('error');
-    }
-  });
+        if (!response.ok) {
+          showError(
+            'Shop not found',
+            'The shop associated with this product doesn't exist.'
+          );
+          return null;
+        }
 
-  // Submit
-  function submitCheckout() {
-    if (isSubmitting) return;
+        const data = await response.json();
+        const product = data.items?.find(p => p.id === productId);
 
-    const banner = document.getElementById('errorBanner');
-    banner.classList.remove('show', 'error');
+        if (!product) {
+          showError(
+            'Product not found',
+            'This product doesn't exist in the shop.'
+          );
+          return null;
+        }
 
-    if (!validateForm()) {
-      banner.textContent = 'Please fill in all required fields.';
-      banner.classList.add('show', 'error');
-      return;
-    }
-
-    isSubmitting = true;
-    const btn = document.getElementById('submitBtn');
-    const origText = btn.textContent;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>Processing...';
-
-    // Simulate payment processing (2–3 seconds)
-    setTimeout(() => {
-      // In production, this calls your backend to process payment via Stripe
-      const success = Math.random() > 0.2; // 80% success rate for demo
-
-      if (success) {
-        banner.textContent = '✓ Order placed! Check your email for confirmation.';
-        banner.classList.add('show', 'success');
-        setTimeout(() => {
-          window.location.href = 'storefront.html'; // Redirect to storefront after success
-        }, 2000);
-      } else {
-        banner.textContent = 'Payment failed. Your card was declined. Please try again.';
-        banner.classList.add('show', 'error');
-        btn.disabled = false;
-        btn.textContent = origText;
-        isSubmitting = false;
+        return { product, merchantId: data.id };
+      } catch (error) {
+        clearTimeout(timeoutId);
+        showError(
+          'Error loading product',
+          'Check your connection and try again.'
+        );
+        return null;
       }
-    }, 2500);
-  }
+    }
 
-  function goBack() {
-    window.location.href = 'storefront.html';
-  }
+    // Store product data globally for form submission
+    let currentProduct = null;
+    let currentMerchantId = null;
 
-  // Init
-  updateQtyDisplay();
-</script>
+    // Render product details
+    function renderProduct(data) {
+      const { product, merchantId } = data;
+      currentProduct = product;
+      currentMerchantId = merchantId;
+      
+      document.getElementById('product-name').textContent = product.name;
+      document.getElementById('total-price').textContent = `${((product.price || 0) / 100).toFixed(2)}`;
+      document.getElementById('loading-container').style.display = 'none';
+      document.getElementById('checkout-form').style.display = 'block';
+    }
 
+    // Submit order
+    document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const customerName = document.getElementById('customer-name').value.trim();
+      const customerEmail = document.getElementById('customer-email').value.trim();
+
+      if (!customerName || !customerEmail || !currentProduct || !currentMerchantId) {
+        showError('Missing fields', 'Please fill in all fields.');
+        return;
+      }
+
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+
+      try {
+        const response = await fetch('/api/order/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            merchantId: currentMerchantId,
+            items: [{ id: currentProduct.id, name: currentProduct.name, price: currentProduct.price, quantity: 1 }],
+            customerName,
+            customerEmail,
+            customerPhone: '',
+            customerAddress: '',
+            notes: '',
+            total: currentProduct.price
+          })
+        });
+
+        if (!response.ok) {
+          showError(
+            'Order failed',
+            `Something went wrong (${response.status}). Try again.`
+          );
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Complete purchase';
+          return;
+        }
+
+        const result = await response.json();
+        // Show success message
+        document.body.innerHTML = `
+          <div class="container">
+            <div class="order-summary" style="text-align: center; margin-top: 60px;">
+              <h1 style="color: var(--color-success); margin-bottom: 16px;">✓ Order Confirmed</h1>
+              <p style="font-size: 14px; color: #7f8c8d; margin-bottom: 24px;">
+                ${result.message || 'Thank you for your order! Check your email for confirmation.'}
+              </p>
+              <p style="font-size: 12px; color: #95a5a6;">Order ID: ${result.orderId}</p>
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        showError(
+          'Network error',
+          'Check your connection and try again.'
+        );
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Complete purchase';
+      }
+    });
+
+    // Initialize
+    const { productId, merchantId } = getQueryParams();
+
+    if (!productId || !merchantId) {
+      showError(
+        'Invalid link',
+        'The checkout link is missing product or shop information.'
+      );
+    } else {
+      loadProduct(merchantId, productId).then(product => {
+        if (product) {
+          renderProduct(product);
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop-in-a-Box — Start selling</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 32px 24px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #212529;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+
+    .content {
+      padding: 32px 24px;
+    }
+
+    #uploadForm {
+      display: block;
+    }
+
+    #successState {
+      display: none;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #212529;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #6c757d;
+      margin-top: 4px;
+    }
+
+    .form-section {
+      margin-bottom: 32px;
+    }
+
+    .form-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #212529;
+      margin-bottom: 16px;
+    }
+
+    .product-row {
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 80px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .product-row input {
+      padding: 8px;
+    }
+
+    .product-row label {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .error {
+      padding: 12px 16px;
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #5568d3;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Success state */
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: #d4edda;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 24px;
+    }
+
+    .success-state h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #155724;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .success-state p {
+      font-size: 14px;
+      color: #6c757d;
+      text-align: center;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .live-link-box {
+      background: #f0f4ff;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .live-link-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #667eea;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .live-link-url {
+      font-size: 14px;
+      color: #212529;
+      word-break: break-all;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .btn-copy {
+      background: #667eea;
+      color: white;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .btn-copy:hover {
+      background: #5568d3;
+    }
+
+    .btn-copy.copied {
+      background: #28a745;
+    }
+
+    .success-next-steps {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .success-next-steps strong {
+      display: block;
+      font-size: 14px;
+      color: #212529;
+      margin-bottom: 12px;
+    }
+
+    .success-next-steps ol {
+      margin-left: 20px;
+      font-size: 14px;
+      color: #6c757d;
+      line-height: 1.8;
+    }
+
+    .success-next-steps li {
+      margin-bottom: 8px;
+    }
+
+    .btn-secondary {
+      background: #e9ecef;
+      color: #212529;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .btn-secondary:hover {
+      background: #dee2e6;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 24px 16px;
+      }
+
+      header h1 {
+        font-size: 20px;
+      }
+
+      .content {
+        padding: 24px 16px;
+      }
+
+      .product-row {
+        grid-template-columns: 1fr 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Start selling</h1>
+      <p>Tell us about your shop and your first product. We'll give you a live link to share with customers.</p>
+    </header>
+
+    <div class="content">
+      <div id="errorContainer"></div>
+
+      <!-- Upload form -->
+      <form id="uploadForm">
+        <div class="form-section">
+          <h3>Your shop</h3>
+          <div class="form-group">
+            <label for="shopName">Shop name</label>
+            <input type="text" id="shopName" name="shopName" placeholder="e.g., Rose Garden Flowers" required>
+            <p class="hint">This will appear on your storefront.</p>
+          </div>
+          <div class="form-group">
+            <label for="ownerEmail">Your email</label>
+            <input type="email" id="ownerEmail" name="ownerEmail" placeholder="you@example.com" required>
+            <p class="hint">We'll send you an email every time someone places an order.</p>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Your first product</h3>
+          <div class="form-group">
+            <label for="productName">Product name</label>
+            <input type="text" id="productName" name="productName" placeholder="e.g., Red Roses (dozen)" required>
+          </div>
+          <div class="form-group">
+            <label for="productPrice">Price (£)</label>
+            <input type="number" id="productPrice" name="productPrice" placeholder="25.00" step="0.01" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea id="productDescription" name="productDescription" placeholder="Tell customers what makes this product special..."></textarea>
+            <p class="hint">Optional. Keep it short.</p>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          <span id="submitText">Create my shop</span>
+        </button>
+      </form>
+
+      <!-- Success state -->
+      <div id="successState">
+        <div class="success-icon">✓</div>
+        <h2>Your shop is live!</h2>
+        <p>Share the link below with your customers. They can browse and place orders immediately.</p>
+
+        <div class="live-link-box">
+          <span class="live-link-label">Your shop link</span>
+          <div class="live-link-url" id="liveUrl">Loading...</div>
+          <button type="button" class="btn-copy" id="copyBtn">Copy link</button>
+        </div>
+
+        <div class="success-next-steps">
+          <strong>What happens next:</strong>
+          <ol>
+            <li><strong>Share your link</strong> — Post it on social media, email, or wherever your customers are.</li>
+            <li><strong>Customers order</strong> — They'll see your product and can place an order anytime.</li>
+            <li><strong>You get notified</strong> — We'll email you each order with the customer's details.</li>
+            <li><strong>You fulfill</strong> — Pack and ship. That's it.</li>
+          </ol>
+        </div>
+
+        <button type="button" class="btn-secondary" onclick="window.location.reload();">
+          Create another product
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const uploadForm = document.getElementById('uploadForm');
+    const successState = document.getElementById('successState');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const errorContainer = document.getElementById('errorContainer');
+    const liveUrlElement = document.getElementById('liveUrl');
+    const copyBtn = document.getElementById('copyBtn');
+
+    uploadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const shopName = document.getElementById('shopName').value.trim();
+      const ownerEmail = document.getElementById('ownerEmail').value.trim();
+      const productName = document.getElementById('productName').value.trim();
+      const productPrice = parseFloat(document.getElementById('productPrice').value);
+      const productDescription = document.getElementById('productDescription').value.trim();
+
+      if (!shopName || !ownerEmail || !productName || !productPrice) {
+        showError('Please fill in all required fields.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitText.innerHTML = '<span class="loading"></span> Creating your shop...';
+      clearError();
+
+      try {
+        // Create merchant
+        const merchantResponse = await fetch('/api/merchant/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: shopName,
+            ownerEmail: ownerEmail,
+          }),
+        });
+
+        if (!merchantResponse.ok) {
+          const errorData = await merchantResponse.json().catch(() => ({}));
+          throw new Error(errorData.message || `Failed to create shop (${merchantResponse.status})`);
+        }
+
+        const merchant = await merchantResponse.json();
+        const merchantId = merchant.id;
+
+        // For v1, we'll assume the storefront endpoint returns the merchant with products embedded
+        // The product is created server-side in the POST /api/merchant/create response
+        // (Anil's implementation will clarify this)
+
+        // Show success state
+        const storefrontUrl = `${window.location.origin}/storefront.html?id=${encodeURIComponent(merchantId)}`;
+        liveUrlElement.textContent = storefrontUrl;
+
+        uploadForm.style.display = 'none';
+        successState.style.display = 'block';
+
+        // Copy button behavior
+        copyBtn.addEventListener('click', (e) => {
+          navigator.clipboard.writeText(storefrontUrl).then(() => {
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = '✓ Copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+              copyBtn.textContent = originalText;
+              copyBtn.classList.remove('copied');
+            }, 2000);
+          }).catch((err) => {
+            console.error('Copy failed:', err);
+            showError('Failed to copy. Try selecting and copying manually.');
+          });
+        });
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitText.textContent = 'Create my shop';
+        showError(err.message);
+        console.error('Onboard error:', err);
+      }
+    });
+
+    function showError(message) {
+      errorContainer.innerHTML = `<div class="error">⚠️ ${escapeHtml(message)}</div>`;
+    }
+
+    function clearError() {
+      errorContainer.innerHTML = '';
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;',
+      };
+      return text.replace(/[&<>"']/g, (m) => map[m]);
+    }
+  </script>
+</body>
+</html>

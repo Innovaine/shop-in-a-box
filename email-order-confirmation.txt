@@ -1,31 +1,32 @@
-Subject: Order Confirmed — Bloom & Stem
+Subject: New order from {CUSTOMER_NAME} — Shop-in-a-Box
 
 ---
 
-Hi [CUSTOMER_NAME],
+Hi {MERCHANT_NAME},
 
-Your order is confirmed! 🎉
+You have a new order!
 
-ORDER DETAILS
-–––––––––––––––––––––––––––––
-Rose Bouquet (qty: 1)
-Price: $45.00
+Order details:
+  Customer: {CUSTOMER_NAME}
+  Email: {CUSTOMER_EMAIL}
+  Product: {PRODUCT_NAME}
+  Quantity: {QUANTITY}
+  Total: £{TOTAL_PRICE}
 
-DELIVERY & PICKUP
-–––––––––––––––––––––––––––––
-Shipping to:
-[CUSTOMER_ADDRESS]
+---
 
-Estimated delivery: 2–3 business days
+Next steps:
+1. Pack and prepare the order
+2. Email the customer at {CUSTOMER_EMAIL} with shipping details and tracking (if applicable)
+3. That's it — you handle fulfillment, we handle the storefront
 
-WHAT'S NEXT
-–––––––––––––––––––––––––––––
-The merchant will prepare your order and send a shipping update within 24 hours. You'll receive a tracking link then.
+Need to update your shop? You can add more products, change prices, or close your shop anytime. Just reply to this email or visit your dashboard.
 
-Questions? Reply to this email or contact the merchant directly.
+Questions? We're here to help.
 
-Thank you for shopping with Bloom & Stem.
+---
 
-–––––––––––––––––––––––––––––
-Shop-in-a-Box
-https://shop.innovaine.app
+Happy selling,
+Shop-in-a-Box team
+
+(This is an automated notification. Do not reply to this email.)

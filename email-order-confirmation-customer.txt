@@ -1,0 +1,23 @@
+Subject: Your order from {{ shopName }} is confirmed
+
+Hi {{ customerName }},
+
+Your order is complete! Here's what you ordered:
+
+{{ productName }}
+Quantity: {{ quantity }}
+Price: £{{ price }}
+
+---
+
+TOTAL: £{{ total }}
+
+Order ID: {{ orderId }}
+
+Thanks for supporting {{ shopName }}. They'll be in touch soon about shipping details.
+
+Questions? Reply to this email.
+
+—
+Shop-in-a-Box
+https://shop-in-a-box.com

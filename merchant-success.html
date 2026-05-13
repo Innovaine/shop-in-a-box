@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Created — Shop-in-a-Box</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .success-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      max-width: 500px;
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .success-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+      display: inline-block;
+      animation: pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .shop-info {
+      background: #f5f5f5;
+      border: 1px solid #e6e6e6;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .shop-info label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .shop-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+
+    .shop-url {
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 13px;
+      color: #0066cc;
+      word-break: break-all;
+      padding: 8px;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #e6e6e6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      color: #0066cc;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 3px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: #f0f0f0;
+    }
+
+    .copy-btn.copied {
+      color: #28a745;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #000;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #333;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #000;
+      border: 2px solid #e6e6e6;
+    }
+
+    .btn-secondary:hover {
+      border-color: #000;
+      background: #f9f9f9;
+    }
+
+    .next-steps {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid #e6e6e6;
+      text-align: left;
+    }
+
+    .next-steps h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .steps-list {
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps-list li {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #555;
+      align-items: flex-start;
+    }
+
+    .steps-list li:before {
+      content: counter(step);
+      counter-increment: step;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 480px) {
+      .success-container {
+        padding: 32px 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .cta-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .shop-url {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <div class="success-icon">✓</div>
+    <h1>Your shop is live</h1>
+    <p class="subtitle">
+      Share your storefront link below. Customers can start ordering right now.
+    </p>
+
+    <div class="shop-info">
+      <label>Shop name</label>
+      <div class="shop-name" id="shopName">The Flower Cart</div>
+
+      <label style="margin-top: 16px;">Your storefront link</label>
+      <div class="shop-url" id="shopUrl">
+        <span id="urlText">https://shop-in-a-box.com/s/the-flower-cart</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyUrl()">Copy</button>
+      </div>
+    </div>
+
+    <div class="cta-group">
+      <a href="#" class="btn btn-primary" onclick="viewStorefront(event)">View your shop</a>
+      <a href="#" class="btn btn-secondary" onclick="addMoreProducts(event)">Add more products</a>
+    </div>
+
+    <div class="next-steps">
+      <h3>What's next</h3>
+      <ul class="steps-list">
+        <li>Share your shop link with friends and family</li>
+        <li>Orders appear in your email inbox instantly</li>
+        <li>No payment setup needed — collect money however you want</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Simulated data — in real app, passed from merchant-onboard.html success state
+    const merchantData = {
+      shopName: "The Flower Cart",
+      shopUrl: "https://shop-in-a-box.com/s/the-flower-cart",
+      merchantId: "merchant_abc123"
+    };
+
+    function copyUrl() {
+      const urlText = document.getElementById("urlText").textContent;
+      navigator.clipboard.writeText(urlText).then(() => {
+        const btn = document.getElementById("copyBtn");
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = "Copy";
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    }
+
+    function viewStorefront(e) {
+      e.preventDefault();
+      // In real app: navigate to storefront.html with merchant ID
+      window.location.href = "/storefront.html?id=" + merchantData.merchantId;
+    }
+
+    function addMoreProducts(e) {
+      e.preventDefault();
+      // In real app: open product creation modal or separate page
+      alert("Product creation flow — coming next");
+    }
+
+    // On page load, populate merchant data if available
+    window.addEventListener("load", () => {
+      if (window.merchantDataFromOnboard) {
+        document.getElementById("shopName").textContent = window.merchantDataFromOnboard.shopName;
+        document.getElementById("urlText").textContent = window.merchantDataFromOnboard.shopUrl;
+      }
+    });
+  </script>
+</body>
+</html>

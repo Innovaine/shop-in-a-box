@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bloom & Stem | Fresh Flowers</title>
+  <title>Shop</title>
   <style>
+    :root {
+      --color-primary: #2c3e50;
+      --color-accent: #e74c3c;
+      --color-border: #ecf0f1;
+      --color-bg: #fafafa;
+      --color-text: #2c3e50;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --type-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --type-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -12,523 +27,374 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: #fafaf9;
-      color: #1f2937;
+      font-family: var(--type-sans);
+      color: var(--color-text);
+      background: var(--color-bg);
       line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-lg);
     }
 
     header {
       background: white;
-      border-bottom: 1px solid #e5e7eb;
-      padding: 16px 20px;
-      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--spacing-lg) 0;
+      margin-bottom: var(--spacing-xl);
     }
 
-    .header-logo {
+    header h1 {
       font-size: 24px;
-      margin-right: 8px;
-    }
-
-    .header-title {
-      font-size: 20px;
       font-weight: 600;
+      color: var(--color-primary);
     }
 
-    .header-subtitle {
-      font-size: 13px;
-      color: #6b7280;
-      margin-top: 4px;
+    header p {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-top: var(--spacing-sm);
     }
 
-    main {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 32px 20px;
-    }
-
-    .hero {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .hero-heading {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #111827;
-    }
-
-    .hero-subhead {
-      font-size: 16px;
-      color: #6b7280;
-      margin-bottom: 24px;
-    }
-
-    .products-section {
-      margin-bottom: 40px;
-    }
-
-    .products-label {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #9ca3af;
-      margin-bottom: 16px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
     }
 
     .product-card {
       background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      padding: 24px;
-      margin-bottom: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+      cursor: pointer;
     }
 
-    .product-left {
-      display: flex;
-      align-items: center;
-      flex: 1;
+    .product-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
-    .product-emoji {
+    .product-image {
+      width: 100%;
+      height: 140px;
+      background: var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #95a5a6;
       font-size: 48px;
-      margin-right: 20px;
-      line-height: 1;
     }
 
     .product-info {
-      flex: 1;
+      padding: var(--spacing-md);
     }
 
     .product-name {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .product-desc {
       font-size: 14px;
-      color: #6b7280;
-      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
     }
 
     .product-price {
       font-size: 16px;
       font-weight: 700;
-      color: #059669;
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-md);
     }
 
-    .product-right {
-      text-align: right;
-      margin-left: 16px;
-    }
-
-    .buy-btn {
-      background: #7c3aed;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .buy-btn:hover {
-      background: #6d28d9;
-    }
-
-    .buy-btn:active {
-      transform: scale(0.98);
-    }
-
-    .checkout-section {
-      background: white;
-      border: 2px solid #e5e7eb;
-      border-radius: 8px;
-      padding: 24px;
-      margin-top: 40px;
-    }
-
-    .checkout-heading {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .checkout-heading.active {
-      display: block;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
+    .btn {
+      width: 100%;
+      padding: 8px 12px;
       font-size: 13px;
       font-weight: 600;
-      margin-bottom: 6px;
-      color: #374151;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
-      font-size: 14px;
-      font-family: inherit;
-      transition: border-color 0.2s;
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #7c3aed;
-      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-    }
-
-    .form-group input.error {
-      border-color: #ef4444;
-    }
-
-    .error-msg {
-      font-size: 12px;
-      color: #ef4444;
-      margin-top: 4px;
-      display: none;
-    }
-
-    .error-msg.show {
-      display: block;
-    }
-
-    .checkout-summary {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 6px;
-      padding: 16px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .checkout-summary.active {
-      display: block;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .summary-row.total {
-      border-top: 1px solid #d1d5db;
-      padding-top: 8px;
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    .submit-btn {
-      width: 100%;
-      background: #059669;
-      color: white;
       border: none;
-      border-radius: 6px;
-      padding: 12px 16px;
-      font-size: 16px;
-      font-weight: 600;
+      border-radius: 3px;
       cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .submit-btn:hover {
-      background: #047857;
-    }
-
-    .submit-btn:disabled {
-      background: #d1d5db;
-      cursor: not-allowed;
-    }
-
-    .success-message {
-      background: #d1fae5;
-      border: 1px solid #6ee7b7;
-      border-radius: 6px;
-      padding: 16px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .success-message.show {
+      transition: background 0.2s ease;
+      text-decoration: none;
+      text-align: center;
       display: block;
     }
 
-    .success-message strong {
-      color: #065f46;
+    .btn-primary {
+      background: var(--color-accent);
+      color: white;
     }
 
-    footer {
+    .btn-primary:hover {
+      background: #c0392b;
+    }
+
+    /* Skeleton state */
+    .skeleton-loader {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skeleton-image {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(90deg, #ecf0f1 25%, #dfe6e9 50%, #ecf0f1 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    .skeleton-text {
+      padding: var(--spacing-md);
+    }
+
+    .skeleton-line {
+      height: 12px;
+      background: linear-gradient(90deg, #ecf0f1 25%, #dfe6e9 50%, #ecf0f1 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 2px;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .skeleton-line:last-child {
+      margin-bottom: 0;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Error state */
+    .error-container {
+      background: white;
+      border: 1px solid #e74c3c;
+      border-radius: 4px;
+      padding: var(--spacing-xl);
       text-align: center;
-      padding: 32px 20px;
-      color: #9ca3af;
+      max-width: 500px;
+      margin: var(--spacing-xl) auto;
+    }
+
+    .error-icon {
+      font-size: 48px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .error-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .error-message {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-bottom: var(--spacing-lg);
+      line-height: 1.6;
+    }
+
+    .error-code {
+      font-family: var(--type-mono);
       font-size: 12px;
+      color: #95a5a6;
+      background: var(--color-bg);
+      padding: var(--spacing-sm);
+      border-radius: 3px;
+      margin-bottom: var(--spacing-lg);
+      word-break: break-all;
     }
 
-    footer a {
-      color: #7c3aed;
-      text-decoration: none;
+    .btn-secondary {
+      background: var(--color-primary);
+      color: white;
+      max-width: 200px;
+      margin: 0 auto;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .btn-secondary:hover {
+      background: #1a252f;
     }
 
-    @media (max-width: 480px) {
-      main {
-        padding: 20px 16px;
-      }
-
-      .hero-heading {
-        font-size: 24px;
-      }
-
-      .product-card {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .product-left {
-        flex-direction: column;
-        margin-bottom: 16px;
-      }
-
-      .product-emoji {
-        margin-right: 0;
-        margin-bottom: 12px;
-      }
-
-      .product-right {
-        text-align: center;
-        margin-left: 0;
-      }
+    /* Timeout warning */
+    .timeout-warning {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 4px;
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      font-size: 13px;
+      color: #856404;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1 id="shop-name">Loading shop...</h1>
+      <p id="shop-description"></p>
+    </header>
 
-<header>
-  <div class="header-title">
-    <span class="header-logo">🌹</span> Bloom & Stem
-  </div>
-  <div class="header-subtitle">Fresh flowers, locally grown</div>
-</header>
-
-<main>
-
-  <div class="hero">
-    <h1 class="hero-heading">Order Fresh Flowers</h1>
-    <p class="hero-subhead">Handpicked arrangements delivered to your door</p>
+    <div id="content">
+      <!-- Will be populated by JavaScript -->
+    </div>
   </div>
 
-  <div class="products-section">
-    <div class="products-label">Available Now</div>
-    
-    <div class="product-card">
-      <div class="product-left">
-        <div class="product-emoji">🌹</div>
-        <div class="product-info">
-          <div class="product-name">Rose Bouquet</div>
-          <div class="product-desc">Dozen premium red roses</div>
-          <div class="product-price">$45.00</div>
-        </div>
-      </div>
-      <div class="product-right">
-        <button class="buy-btn" data-product="Rose Bouquet" data-price="45.00">Buy Now</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-left">
-        <div class="product-emoji">🌷</div>
-        <div class="product-info">
-          <div class="product-name">Tulip Mix</div>
-          <div class="product-desc">Vibrant spring colors</div>
-          <div class="product-price">$38.00</div>
-        </div>
-      </div>
-      <div class="product-right">
-        <button class="buy-btn" data-product="Tulip Mix" data-price="38.00">Buy Now</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-left">
-        <div class="product-emoji">🌼</div>
-        <div class="product-info">
-          <div class="product-name">Sunflower Bundle</div>
-          <div class="product-desc">Bright and cheerful</div>
-          <div class="product-price">$32.00</div>
-        </div>
-      </div>
-      <div class="product-right">
-        <button class="buy-btn" data-product="Sunflower Bundle" data-price="32.00">Buy Now</button>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="checkout-section">
-    <h2 class="checkout-heading">Complete Your Order</h2>
-    
-    <div class="success-message" id="successMsg">
-      <strong>✓ Order confirmed!</strong> Check your email for details.
-    </div>
-
-    <div class="checkout-summary" id="checkoutSummary">
-      <div class="summary-row">
-        <span id="summaryProduct">Rose Bouquet</span>
-        <span id="summaryPrice">$45.00</span>
-      </div>
-      <div class="summary-row total">
-        <span>Total</span>
-        <span id="summaryTotal">$45.00</span>
-      </div>
-    </div>
-
-    <form id="checkoutForm" style="display: none;">
-      <div class="form-group">
-        <label for="customerName">Your Name *</label>
-        <input type="text" id="customerName" name="name" required>
-        <div class="error-msg" id="nameError">Please enter your name</div>
-      </div>
-
-      <div class="form-group">
-        <label for="customerEmail">Email Address *</label>
-        <input type="email" id="customerEmail" name="email" required>
-        <div class="error-msg" id="emailError">Please enter a valid email</div>
-      </div>
-
-      <div class="form-group">
-        <label for="customerAddress">Delivery Address *</label>
-        <input type="text" id="customerAddress" name="address" placeholder="Street, city, state, zip" required>
-        <div class="error-msg" id="addressError">Please enter your address</div>
-      </div>
-
-      <button type="submit" class="submit-btn">Confirm Order</button>
-    </form>
-  </div>
-
-</main>
-
-<footer>
-  <p>Shop-in-a-Box | <a href="#">Manage your shop</a></p>
-</footer>
-
-<script>
-  let selectedProduct = null;
-  const form = document.getElementById('checkoutForm');
-  const checkoutSection = document.querySelector('.checkout-section');
-  const checkoutHeading = document.querySelector('.checkout-heading');
-  const checkoutSummary = document.getElementById('checkoutSummary');
-  const successMsg = document.getElementById('successMsg');
-
-  // Buy button handlers
-  document.querySelectorAll('.buy-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      selectedProduct = {
-        name: btn.dataset.product,
-        price: btn.dataset.price
-      };
-      openCheckout();
-    });
-  });
-
-  function openCheckout() {
-    form.style.display = 'block';
-    checkoutHeading.classList.add('active');
-    checkoutSummary.classList.add('active');
-    successMsg.classList.remove('show');
-
-    document.getElementById('summaryProduct').textContent = selectedProduct.name;
-    document.getElementById('summaryPrice').textContent = '$' + parseFloat(selectedProduct.price).toFixed(2);
-    document.getElementById('summaryTotal').textContent = '$' + parseFloat(selectedProduct.price).toFixed(2);
-
-    // Clear errors and form
-    form.reset();
-    document.querySelectorAll('.error-msg').forEach(msg => msg.classList.remove('show'));
-    document.querySelectorAll('input').forEach(inp => inp.classList.remove('error'));
-
-    // Scroll to form
-    checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('customerName').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-
-    let valid = true;
-
-    // Validate name
-    if (!name) {
-      document.getElementById('nameError').classList.add('show');
-      document.getElementById('customerName').classList.add('error');
-      valid = false;
-    } else {
-      document.getElementById('nameError').classList.remove('show');
-      document.getElementById('customerName').classList.remove('error');
+  <script>
+    // Get merchant ID from URL query parameter
+    function getMerchantId() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('merchant');
+      if (!id) {
+        showError(
+          'No shop specified',
+          'The link you followed doesn't include a shop ID.',
+          'INVALID_MERCHANT_PARAM'
+        );
+        return null;
+      }
+      return id;
     }
 
-    // Validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
-      document.getElementById('emailError').classList.add('show');
-      document.getElementById('customerEmail').classList.add('error');
-      valid = false;
-    } else {
-      document.getElementById('emailError').classList.remove('show');
-      document.getElementById('customerEmail').classList.remove('error');
+    // Fetch merchant data with timeout
+    async function fetchMerchantData(merchantId) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5-second timeout
+
+      try {
+        const response = await fetch(`/api/merchant/${merchantId}`, {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            showError(
+              'Shop not found',
+              'This shop doesn't exist or has been removed.',
+              `MERCHANT_NOT_FOUND: ${merchantId}`
+            );
+          } else {
+            showError(
+              'Something went wrong',
+              `The server returned an error (${response.status}).`,
+              `HTTP_${response.status}`
+            );
+          }
+          return null;
+        }
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        clearTimeout(timeoutId);
+
+        if (error.name === 'AbortError') {
+          showError(
+            'Shop is taking too long to load',
+            'The shop's data didn't arrive within 5 seconds. Try refreshing the page.',
+            'TIMEOUT_5S'
+          );
+        } else {
+          showError(
+            'Network error',
+            'Check your internet connection and try again.',
+            `NETWORK: ${error.message}`
+          );
+        }
+        return null;
+      }
     }
 
-    // Validate address
-    if (!address) {
-      document.getElementById('addressError').classList.add('show');
-      document.getElementById('customerAddress').classList.add('error');
-      valid = false;
-    } else {
-      document.getElementById('addressError').classList.remove('show');
-      document.getElementById('customerAddress').classList.remove('error');
+    // Render skeleton loaders
+    function showSkeleton(count = 6) {
+      const content = document.getElementById('content');
+      content.innerHTML = `<div class="grid">${Array.from({ length: count })
+        .map(() => `
+          <div class="skeleton-loader">
+            <div class="skeleton-image"></div>
+            <div class="skeleton-text">
+              <div class="skeleton-line" style="width: 70%;"></div>
+              <div class="skeleton-line" style="width: 50%;"></div>
+              <div class="skeleton-line" style="width: 100%; height: 24px; margin-top: 12px;"></div>
+            </div>
+          </div>
+        `)
+        .join('')}</div>`;
     }
 
-    if (!valid) return;
+    // Render error state
+    function showError(title, message, errorCode) {
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <div class="error-container">
+          <div class="error-icon">⚠️</div>
+          <h2 class="error-title">${title}</h2>
+          <p class="error-message">${message}</p>
+          <div class="error-code">${errorCode}</div>
+          <button class="btn btn-secondary" onclick="window.location.href='/'">Back to home</button>
+        </div>
+      `;
+    }
 
-    // Submit (in production, POST to backend)
-    form.style.display = 'none';
-    checkoutHeading.classList.remove('active');
-    checkoutSummary.classList.remove('active');
-    successMsg.classList.add('show');
+    // Render merchant data
+    function renderMerchant(data) {
+      const { shopName, description, items } = data;
 
-    console.log('Order submitted:', {
-      product: selectedProduct.name,
-      price: selectedProduct.price,
-      customer: name,
-      email: email,
-      address: address
-    });
-  });
-</script>
+      // Update header
+      document.getElementById('shop-name').textContent = shopName || 'Shop';
+      document.getElementById('shop-description').textContent = description || '';
+      document.title = shopName || 'Shop';
 
+      // Render products
+      const content = document.getElementById('content');
+      if (!items || items.length === 0) {
+        content.innerHTML = `
+          <div class="error-container">
+            <div class="error-icon">📦</div>
+            <h2 class="error-title">No products yet</h2>
+            <p class="error-message">This shop hasn't added any products yet. Check back soon.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const gridHtml = `
+        <div class="grid">
+          ${items.map(item => `
+            <div class="product-card" onclick="goToCheckout('${item.id}', '${data.id}')">
+              <div class="product-image">${item.image ? `<img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;">` : '📷'}</div>
+              <div class="product-info">
+                <div class="product-name" data-testid="product-name">${item.name || 'Unnamed'}</div>
+                <div class="product-price" data-testid="product-price">${((item.price || 0) / 100).toFixed(2)}</div>
+                <button class="btn btn-primary" data-testid="buy-button">Buy now</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      content.innerHTML = gridHtml;
+    }
+
+    // Navigate to checkout
+    function goToCheckout(productId, merchantId) {
+      window.location.href = `/checkout.html?product=${productId}&merchant=${merchantId}`;
+    }
+
+    // Initialize
+    const merchantId = getMerchantId();
+    if (merchantId) {
+      showSkeleton();
+      fetchMerchantData(merchantId).then(data => {
+        if (data) {
+          renderMerchant(data);
+        }
+      });
+    }
+  </script>
 </body>
 </html>

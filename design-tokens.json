@@ -1,0 +1,77 @@
+{
+  "colors": {
+    "primary": {
+      "50": "#f0f7ff",
+      "100": "#e0effe",
+      "200": "#c7e9fd",
+      "300": "#a3dcfd",
+      "400": "#7ecbf9",
+      "500": "#2563eb",
+      "600": "#1d4ed8",
+      "700": "#1e40af",
+      "800": "#1e3a8a",
+      "900": "#172554"
+    },
+    "neutral": {
+      "0": "#ffffff",
+      "50": "#fafafa",
+      "100": "#f5f5f5",
+      "200": "#eeeeee",
+      "300": "#e0e0e0",
+      "400": "#bdbdbd",
+      "500": "#9e9e9e",
+      "600": "#757575",
+      "700": "#616161",
+      "800": "#424242",
+      "900": "#212121"
+    },
+    "success": "#10b981",
+    "success-light": "#ecfdf5",
+    "success-text": "#065f46",
+    "error": "#d32f2f",
+    "error-light": "#ffebee",
+    "warning": "#f97316",
+    "border": "#ddd"
+  },
+  "typography": {
+    "font-family": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+    "scale": {
+      "xs": { "size": "12px", "line-height": "1.5", "weight": "400" },
+      "sm": { "size": "13px", "line-height": "1.5", "weight": "400" },
+      "base": { "size": "14px", "line-height": "1.6", "weight": "400" },
+      "lg": { "size": "16px", "line-height": "1.6", "weight": "400" },
+      "xl": { "size": "20px", "line-height": "1.4", "weight": "600" },
+      "2xl": { "size": "24px", "line-height": "1.3", "weight": "600" },
+      "3xl": { "size": "28px", "line-height": "1.2", "weight": "600" },
+      "4xl": { "size": "32px", "line-height": "1.1", "weight": "700" }
+    }
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "12px",
+    "lg": "16px",
+    "xl": "20px",
+    "2xl": "24px",
+    "3xl": "32px",
+    "4xl": "40px"
+  },
+  "radius": {
+    "sm": "4px",
+    "md": "6px",
+    "lg": "8px",
+    "xl": "12px",
+    "full": "9999px"
+  },
+  "shadows": {
+    "xs": "0 1px 2px rgba(0, 0, 0, 0.05)",
+    "sm": "0 1px 3px rgba(0, 0, 0, 0.1)",
+    "md": "0 2px 12px rgba(0, 0, 0, 0.08)",
+    "lg": "0 4px 20px rgba(0, 0, 0, 0.12)"
+  },
+  "transitions": {
+    "fast": "0.15s ease-in-out",
+    "base": "0.2s ease-in-out",
+    "slow": "0.3s ease-in-out"
+  }
+}

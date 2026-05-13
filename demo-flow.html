@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop-in-a-Box — Happy Path Flow</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f9f9f9;
+      color: #000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .flow-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .step-number {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #000;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      margin-right: 30px;
+    }
+
+    .step-description {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .step-details {
+      background: #f5f5f5;
+      border: 1px solid #e6e6e6;
+      border-radius: 4px;
+      padding: 12px;
+      font-family: "SF Mono", Monaco, monospace;
+      font-size: 11px;
+      color: #333;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+
+    .step-action {
+      font-size: 12px;
+      font-weight: 500;
+      color: #0066cc;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 20px;
+      color: #999;
+    }
+
+    @media (max-width: 768px) {
+      .flow-container {
+        grid-template-columns: 1fr;
+      }
+      .flow-arrow {
+        display: none;
+      }
+    }
+
+    .critical-path {
+      border-left: 4px solid #ff6b6b;
+    }
+
+    .endpoint-box {
+      background: #fff8f0;
+      border-left: 3px solid #ff8c00;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 11px;
+      font-family: monospace;
+    }
+
+    .question {
+      background: #fffbf0;
+      border-left: 3px solid #ffa500;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: #cc6600;
+    }
+
+    .success-marker {
+      background: #f0f9f0;
+      border-left: 3px solid #28a745;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: #155724;
+    }
+
+    .legend {
+      display: flex;
+      gap: 20px;
+      margin-top: 40px;
+      padding: 20px;
+      background: white;
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Shop-in-a-Box — Happy Path Flow</h1>
+    <p class="subtitle">Merchant upload → storefront → customer purchase → confirmation. Every step mapped, every assumption flagged.</p>
+
+    <div class="flow-container">
+      <!-- Step 1 -->
+      <div class="step critical-path">
+        <div class="step-number">1</div>
+        <div class="step-title">Merchant Onboard</div>
+        <div class="step-description">
+          Merchant lands on <code>merchant-onboard.html</code>, fills form with shop name, description, and product CSV.
+        </div>
+        <div class="step-details">
+          POST /api/merchant/create<br>
+          { shopName, description, csv }
+        </div>
+        <div class="endpoint-box">
+          Expected response: { merchantId, publicUrl }
+        </div>
+        <div class="question">
+          ❓ Does /api/merchant/create return the exact shape above? Anil: confirm response contract.
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 2 -->
+      <div class="step critical-path">
+        <div class="step-number">2</div>
+        <div class="step-title">Success Page</div>
+        <div class="step-description">
+          Server returns HTTP 200, frontend renders merchant-success.html with animated checkmark, shop name, and shareable URL.
+        </div>
+        <div class="step-details">
+          URL display: /storefront.html?merchant=MERCHANT_ID<br>
+          Copy button copies full URL to clipboard
+        </div>
+        <div class="question">
+          ❓ Is the storefront route <code>/storefront.html?merchant=:id</code> or <code>/api/merchant/:id/storefront</code> or something else? Needs exact path.
+        </div>
+        <div class="success-marker">
+          ✓ This is the celebration moment. Merchant will screenshot and share this link.
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 3 -->
+      <div class="step critical-path">
+        <div class="step-number">3</div>
+        <div class="step-title">Customer Click</div>
+        <div class="step-description">
+          Customer (random person, friend, anyone) receives link and clicks through to the storefront.
+        </div>
+        <div class="step-details">
+          GET /storefront.html?merchant=ABC123
+        </div>
+        <div class="question">
+          ❓ Does storefront.html parse the query param and fetch product data? What's the product list endpoint?
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 4 -->
+      <div class="step critical-path">
+        <div class="step-number">4</div>
+        <div class="step-title">Storefront Renders</div>
+        <div class="step-description">
+          storefront.html loads. It shows skeleton state while fetching, then renders product grid with name, price, image placeholder, and "Buy" button.
+        </div>
+        <div class="step-details">
+          GET /api/merchant/ABC123<br>
+          Returns: { shopName, products: [{id, name, price, image}...] }
+        </div>
+        <div class="question">
+          ❓ Does /api/merchant/:id return the product array? Or is there a separate /api/merchant/:id/products endpoint?
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 5 -->
+      <div class="step critical-path">
+        <div class="step-number">5</div>
+        <div class="step-title">Customer Clicks Buy</div>
+        <div class="step-description">
+          Customer clicks "Buy" button on any product. Redirects to checkout.html with product ID in URL.
+        </div>
+        <div class="step-details">
+          GET /checkout.html?product=FLOWER_ID&merchant=ABC123
+        </div>
+        <div class="question">
+          ❓ Does checkout.html accept both product ID and merchant ID as query params? Needs confirmation.
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 6 -->
+      <div class="step critical-path">
+        <div class="step-number">6</div>
+        <div class="step-title">Checkout Form</div>
+        <div class="step-description">
+          Customer enters email, name, and quantity. Submits form.
+        </div>
+        <div class="step-details">
+          POST /api/order/create<br>
+          { merchantId, productId, quantity, customerName, customerEmail }
+        </div>
+        <div class="question">
+          ❓ Does /api/order/create accept all these fields? What does it return?
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 7 -->
+      <div class="step critical-path">
+        <div class="step-number">7</div>
+        <div class="step-title">Order Confirmation</div>
+        <div class="step-description">
+          Customer sees order success screen with order ID. Merchant receives email notification.
+        </div>
+        <div class="endpoint-box">
+          Email triggers: email-order-confirmation.txt<br>
+          Recipient: merchant email (from upload)
+        </div>
+        <div class="question">
+          ❓ How does the server know the merchant's email address? Is it stored from step 1? Needs confirmation.
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 8 -->
+      <div class="step">
+        <div class="step-number">8</div>
+        <div class="step-title">Confirmation Email (Merchant)</div>
+        <div class="step-description">
+          Merchant receives email with customer details and order info.
+        </div>
+        <div class="step-details">
+          From: Shop-in-a-Box<br>
+          Subject: New order from [Customer Name]<br>
+          Contains: product, qty, price, customer email
+        </div>
+        <div class="success-marker">
+          ✓ This is where the real sale happens. Email must include customer email so merchant can reach them.
+        </div>
+      </div>
+
+      <div class="flow-arrow">↓</div>
+
+      <!-- Step 9 -->
+      <div class="step">
+        <div class="step-number">9</div>
+        <div class="step-title">Confirmation Email (Customer)</div>
+        <div class="step-description">
+          Customer receives order confirmation with price and order ID.
+        </div>
+        <div class="step-details">
+          From: Shop-in-a-Box<br>
+          Subject: Your order from [Shop Name] is confirmed<br>
+          Contains: what they bought, price, order ID
+        </div>
+        <div class="question">
+          ❓ Is this email actually sent? Anil: confirm sendmail integration is live.
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color" style="background: #ff6b6b;"></div>
+        <span>Critical path (must work for v1)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #ffa500;"></div>
+        <span>Validation needed</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #28a745;"></div>
+        <span>User moment (UX critical)</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 24px; background: #f0f0f0; border-radius: 8px; font-size: 13px; line-height: 1.6;">
+      <strong>Next action:</strong> Anil to provide endpoint contract document (request/response shapes for all 4 endpoints). Designer to run end-to-end test with real browser flow to confirm URL patterns match. If any URL is wrong, checkout or success page buttons break the flow entirely.
+    </div>
+
+  </div>
+</body>
+</html>
