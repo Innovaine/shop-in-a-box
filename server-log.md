@@ -435,3 +435,19 @@ drwx------  2 tester tester 4096 May 13 05:11 .ssh
 drwxrwxr-x 23 tester tester 4096 May 13 17:23 email-to-sql
 ```
 Full output: [`server-runs/2026-05-13T18-46-25-app-ls--la-1.log`](server-runs/2026-05-13T18-46-25-app-ls--la-1.log)
+
+## 2026-05-13T18:47:06.703Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `e4c7741` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 3093ms)
+```
+git clone https://github.com/Innovaine/shop-in-a-box.git ~/shop-in-a-box && cd ~/shop-in-a-box && ls -la tests/
+```
+STDOUT:
+```
+total 12
+drwxrwxr-x 3 tester tester 4096 May 13 18:47 .
+drwxrwxr-x 9 tester tester 4096 May 13 18:47 ..
+drwxrwxr-x 2 tester tester 4096 May 13 18:47 web
+```
+Full output: [`server-runs/2026-05-13T18-47-06-app-git-clone-https-github.com-Innovaine-sho-1.log`](server-runs/2026-05-13T18-47-06-app-git-clone-https-github.com-Innovaine-sho-1.log)
