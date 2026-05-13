@@ -978,3 +978,59 @@ MERCHANT_ID: 137ef8ea-b123-44ee-af4f-f1a57c3b1316
     const merchantId = getMerchantId();
 ```
 Full output: [`server-runs/2026-05-13T19-11-09-app-cd-shop-in-a-box-cat-tmp-test_debug.sh-E-1.log`](server-runs/2026-05-13T19-11-09-app-cd-shop-in-a-box-cat-tmp-test_debug.sh-E-1.log)
+
+## 2026-05-13T19:11:39.936Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `73ff759` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 9761ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts --reporter=list --trace on 2>&1 | head -100
+```
+STDOUT:
+```
+
+Running 1 test using 1 worker
+
+✓ Created test merchant: 4b541b1c-a063-4e2a-afd3-27751e9311eb
+  ✘  1 tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly (5.1s)
+
+
+  1) tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('h1, h2')
+    Expected substring: [32m"Test Bakery"[39m
+    Received string:    [31m"Loading shop..."[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for locator('h1, h2')[22m
+    [2m    14 × locator resolved to <h1 id="shop-name">Loading shop...</h1>[22m
+    [2m       - unexpected value "Loading shop..."[22m
+
+
+      31 |   
+      32 |   // Check page title/header displays shop name
+    > 33 |   await expect(page.locator('h1, h2')).toContainText('Test Bakery');
+         |                                        ^
+      34 |   
+      35 |   // Verify all three products are displayed
+      36 |   const productCards = page.locator('[data-testid="product-card"], .product-item, .product');
+        at /home/engineer/shop-in-a-box/tests/web/storefront.spec.ts:33:40
+
+    Error Context: test-results/tests-web-storefront-store-d8d8d-merchant-products-correctly/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/tests-web-storefront-store-d8d8d-merchant-products-correctly/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/tests-web-storefront-store-d8d8d-merchant-products-correctly/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly ─────────────
+```
+Full output: [`server-runs/2026-05-13T19-11-39-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-11-39-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
