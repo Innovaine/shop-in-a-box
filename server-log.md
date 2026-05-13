@@ -366,3 +366,31 @@ Verifying upload.html is served correctly:
   <title>Shop-in-a-Box — Merchant Upload</title>
 ```
 Full output: [`server-runs/2026-05-13T18-43-36-app-cd-shop-in-a-box-cat-tmp-test_pages.sh-E-1.log`](server-runs/2026-05-13T18-43-36-app-cd-shop-in-a-box-cat-tmp-test_pages.sh-E-1.log)
+
+## 2026-05-13T18:43:55.135Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `2e70156` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 2682ms)
+```
+cd ~/shop-in-a-box && docker compose logs app | grep -A 5 "\[EMAIL\]" | tail -20
+```
+STDOUT:
+```
+app-1  | [EMAIL] No credentials configured - emails will be logged but not sent
+app-1  | [SERVER] Shop-in-a-Box running on port 3000
+app-1  | [SERVER] Upload page: http://localhost:3000/upload
+app-1  | [EMAIL] Would send email:
+app-1  |   To: john@example.com
+app-1  |   Subject: Order Confirmation - Test Florist
+app-1  |   Body:
+app-1  | Hi John Doe,
+app-1  | 
+--
+app-1  | [EMAIL] Would send email:
+app-1  |   To: florist@example.com
+app-1  |   Subject: New Order Received - Test Florist
+app-1  |   Body:
+app-1  | You have received a new order!
+app-1  |
+```
+Full output: [`server-runs/2026-05-13T18-43-55-app-cd-shop-in-a-box-docker-compose-logs-app-1.log`](server-runs/2026-05-13T18-43-55-app-cd-shop-in-a-box-docker-compose-logs-app-1.log)
