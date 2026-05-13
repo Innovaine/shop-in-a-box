@@ -596,3 +596,59 @@ Running 2 tests using 1 worker
   ✘  1 tests/web/checkout.spec.ts:5:5 › customer can complete checkout and receive order confirmation (5.2s)
 ```
 Full output: [`server-runs/2026-05-13T18-50-39-app-cat-tmp-playwright-checkout.log-2-dev-nu-1.log`](server-runs/2026-05-13T18-50-39-app-cat-tmp-playwright-checkout.log-2-dev-nu-1.log)
+
+## 2026-05-13T19:08:19.756Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `0d87122` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 3574ms) _(showing tail — full 2,089B stdout + 0B stderr)_
+```
+cd ~/shop-in-a-box && git pull --ff-only
+```
+STDOUT:
+```
+…heckout.html                         |  725 ++---
+ day-01/_index.md                      |   26 +
+ day-01/engineering.md                 |  129 +
+ day-01/review.md                      |  213 ++
+ day-01/test.md                        |  187 ++
+ day-02/_plan.md                       |   36 +
+ day-02/design.md                      | 4812 +++++++++++++++++++++++++++++++++
+ demo-flow.html                        |  367 +++
+ design-tokens.json                    |   77 +
+ email-order-confirmation-customer.txt |   23 +
+ email-order-confirmation.txt          |   41 +-
+ error-states.html                     |  295 ++
+ landing.html                          |  453 ++++
+ merchant-onboard.html                 |  508 ++++
+ merchant-success.html                 |  311 +++
+ server-log.md                         |  598 ++++
+ storefront-loading.html               |  226 ++
+ storefront.html                       |  732 ++---
+ test-results/day-01/report.md         |   83 +
+ tests/web/checkout.spec.ts            |   97 +
+ tests/web/merchant-upload.spec.ts     |   47 +
+ tests/web/storefront.spec.ts          |   57 +
+ validation-checklist.md               |   11 +
+ 23 files changed, 9158 insertions(+), 896 deletions(-)
+ create mode 100644 day-01/_index.md
+ create mode 100644 day-01/engineering.md
+ create mode 100644 day-01/review.md
+ create mode 100644 day-01/test.md
+ create mode 100644 day-02/_plan.md
+ create mode 100644 day-02/design.md
+ create mode 100644 demo-flow.html
+ create mode 100644 design-tokens.json
+ create mode 100644 email-order-confirmation-customer.txt
+ create mode 100644 error-states.html
+ create mode 100644 landing.html
+ create mode 100644 merchant-onboard.html
+ create mode 100644 merchant-success.html
+ create mode 100644 server-log.md
+ create mode 100644 storefront-loading.html
+ create mode 100644 test-results/day-01/report.md
+ create mode 100644 tests/web/checkout.spec.ts
+ create mode 100644 tests/web/merchant-upload.spec.ts
+ create mode 100644 tests/web/storefront.spec.ts
+ create mode 100644 validation-checklist.md
+```
+Full output: [`server-runs/2026-05-13T19-08-19-app-cd-shop-in-a-box-git-pull---ff-only-1.log`](server-runs/2026-05-13T19-08-19-app-cd-shop-in-a-box-git-pull---ff-only-1.log)
