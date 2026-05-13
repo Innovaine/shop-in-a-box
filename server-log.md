@@ -257,3 +257,52 @@ MERCHANT_ID: 2f2dee61-2542-4456-8098-be8d249e5a40
 }
 ```
 Full output: [`server-runs/2026-05-13T18-42-51-app-cd-shop-in-a-box-cat-tmp-test_merchant.s-1.log`](server-runs/2026-05-13T18-42-51-app-cd-shop-in-a-box-cat-tmp-test_merchant.s-1.log)
+
+## 2026-05-13T18:43:13.151Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `b4d34cc` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 2336ms)
+```
+cd ~/shop-in-a-box && cat > /tmp/test_order.sh << 'EOF'
+#!/bin/bash
+
+MERCHANT_ID="2f2dee61-2542-4456-8098-be8d249e5a40"
+
+# Test: POST /api/order/create
+RESPONSE=$(curl -s -X POST http://localhost:3000/api/order/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "merchantId": "'$MERCHANT_ID'",
+    "items": [
+      {"id": "5c365a10-29fd-4762-9f5e-eb8ee0c8e56d", "name": "Rose Bouquet", "price": 25.00}
+    ],
+    "customerName": "John Doe",
+    "customerEmail": "john@example.com",
+    "customerPhone": "555-1234",
+    "customerAddress": "123 Main St, City, State 12345",
+    "notes": "Please leave at front door",
+    "total": 25.00
+  }')
+
+echo "=== CREATE ORDER RESPONSE ==="
+echo "$RESPONSE" | jq .
+
+ORDER_ID=$(echo "$RESPONSE" | jq -r '.orderId')
+echo ""
+echo "ORDER_ID: $ORDER_ID"
+EOF
+chmod +x /tmp/test_order.sh
+/tmp/test_order.sh
+```
+STDOUT:
+```
+=== CREATE ORDER RESPONSE ===
+{
+  "success": true,
+  "orderId": "3dfabf8e-9c7b-4a53-a353-ee2687a59159",
+  "message": "Order placed successfully! Check your email for confirmation."
+}
+
+ORDER_ID: 3dfabf8e-9c7b-4a53-a353-ee2687a59159
+```
+Full output: [`server-runs/2026-05-13T18-43-13-app-cd-shop-in-a-box-cat-tmp-test_order.sh-E-1.log`](server-runs/2026-05-13T18-43-13-app-cd-shop-in-a-box-cat-tmp-test_order.sh-E-1.log)
