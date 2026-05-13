@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Bloom & Stem</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 16px;
+      background: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      margin-bottom: 32px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 16px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .merchant-name {
+      font-weight: 600;
+      color: #059669;
+    }
+
+    .product-summary {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .product-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .product-row:last-child {
+      margin-bottom: 0;
+      padding-top: 12px;
+      border-top: 1px solid #d1d5db;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .product-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .product-qty {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .total-label {
+      color: #374151;
+    }
+
+    .total-price {
+      color: #059669;
+    }
+
+    .form-section {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .form-label .required {
+      color: #dc2626;
+    }
+
+    .form-input-group {
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-input.error {
+      border-color: #dc2626;
+    }
+
+    .form-input.error:focus {
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+
+    .form-error {
+      font-size: 12px;
+      color: #dc2626;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form-error.show {
+      display: block;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .qty-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #d1d5db;
+      background: white;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #374151;
+      transition: all 0.2s;
+    }
+
+    .qty-btn:hover:not(:disabled) {
+      background: #f3f4f6;
+      border-color: #9ca3af;
+    }
+
+    .qty-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .qty-input {
+      width: 60px;
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .qty-display {
+      font-size: 14px;
+      font-weight: 600;
+      width: 60px;
+      text-align: center;
+    }
+
+    .stripe-element {
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: white;
+    }
+
+    .form-banner {
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      display: none;
+      border-left: 4px solid transparent;
+    }
+
+    .form-banner.show {
+      display: block;
+    }
+
+    .form-banner.error {
+      background: #fee2e2;
+      border-left-color: #dc2626;
+      color: #991b1b;
+    }
+
+    .form-banner.success {
+      background: #dcfce7;
+      border-left-color: #16a34a;
+      color: #166534;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #059669;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #047857;
+    }
+
+    .btn-primary:disabled {
+      background: #d1d5db;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .btn-secondary:hover {
+      background: #d1d5db;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 6px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .security-badge {
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 16px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>Checkout</h1>
+    <p>Shop at <span class="merchant-name">Bloom & Stem</span></p>
+  </div>
+
+  <div class="form-banner error" id="errorBanner"></div>
+
+  <!-- Product Summary -->
+  <div class="product-summary">
+    <div class="product-row">
+      <div>
+        <div class="product-name">Roses (12-stem)</div>
+        <div class="product-qty" id="qty-display">Qty: 1</div>
+      </div>
+      <div class="product-price" id="unit-price">$49.99</div>
+    </div>
+    <div class="product-row">
+      <div class="total-label">Total</div>
+      <div class="total-price" id="total-price">$49.99</div>
+    </div>
+  </div>
+
+  <!-- Customer Name -->
+  <div class="form-section">
+    <label class="form-label">Full Name <span class="required">*</span></label>
+    <div class="form-input-group">
+      <input 
+        type="text" 
+        id="customerName" 
+        class="form-input" 
+        placeholder="Sarah Chen"
+        maxlength="100"
+      >
+      <div class="form-error" id="nameError"></div>
+    </div>
+  </div>
+
+  <!-- Customer Email -->
+  <div class="form-section">
+    <label class="form-label">Email <span class="required">*</span></label>
+    <div class="form-input-group">
+      <input 
+        type="email" 
+        id="customerEmail" 
+        class="form-input" 
+        placeholder="sarah@example.com"
+      >
+      <div class="form-error" id="emailError"></div>
+    </div>
+  </div>
+
+  <!-- Quantity -->
+  <div class="form-section">
+    <label class="form-label">Quantity <span class="required">*</span></label>
+    <div class="quantity-control">
+      <button class="qty-btn" id="qtyMinus" onclick="decrementQty()">−</button>
+      <div class="qty-display" id="qtyValue">1</div>
+      <button class="qty-btn" id="qtyPlus" onclick="incrementQty()">+</button>
+    </div>
+  </div>
+
+  <!-- Payment Info (Stripe placeholder) -->
+  <div class="form-section">
+    <label class="form-label">Payment <span class="required">*</span></label>
+    <div class="form-input-group">
+      <div class="stripe-element" id="stripeElement">
+        <p style="font-size: 13px; color: #9ca3af; margin: 0;">
+          [Stripe Card Element will mount here — test card: 4242 4242 4242 4242]
+        </p>
+      </div>
+      <div class="form-error" id="stripeError"></div>
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <div class="button-group">
+    <button class="btn btn-primary" id="submitBtn" onclick="submitCheckout()">
+      Complete Order
+    </button>
+    <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
+  </div>
+
+  <div class="security-badge">
+    🔒 Payments secured by Stripe
+  </div>
+
+</div>
+
+<script>
+  const PRODUCT_PRICE = 49.99;
+  let quantity = 1;
+  let isSubmitting = false;
+
+  // Quantity controls
+  function incrementQty() {
+    if (quantity < 99) {
+      quantity++;
+      updateQtyDisplay();
+    }
+  }
+
+  function decrementQty() {
+    if (quantity > 1) {
+      quantity--;
+      updateQtyDisplay();
+    }
+  }
+
+  function updateQtyDisplay() {
+    const qtyValue = document.getElementById('qtyValue');
+    const qtyDisplay = document.getElementById('qty-display');
+    const totalPrice = document.getElementById('total-price');
+    const qtyMinus = document.getElementById('qtyMinus');
+
+    qtyValue.textContent = quantity;
+    qtyDisplay.textContent = `Qty: ${quantity}`;
+    totalPrice.textContent = `$${(PRODUCT_PRICE * quantity).toFixed(2)}`;
+    qtyMinus.disabled = quantity === 1;
+  }
+
+  // Validation
+  function validateForm() {
+    const name = document.getElementById('customerName').value.trim();
+    const email = document.getElementById('customerEmail').value.trim();
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+
+    let isValid = true;
+
+    // Name validation
+    if (!name) {
+      nameError.textContent = 'Name is required';
+      nameError.classList.add('show');
+      document.getElementById('customerName').classList.add('error');
+      isValid = false;
+    } else {
+      nameError.classList.remove('show');
+      document.getElementById('customerName').classList.remove('error');
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      emailError.textContent = 'Email is required';
+      emailError.classList.add('show');
+      document.getElementById('customerEmail').classList.add('error');
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      emailError.textContent = 'Please enter a valid email (e.g., sarah@example.com)';
+      emailError.classList.add('show');
+      document.getElementById('customerEmail').classList.add('error');
+      isValid = false;
+    } else {
+      emailError.classList.remove('show');
+      document.getElementById('customerEmail').classList.remove('error');
+    }
+
+    return isValid;
+  }
+
+  // Real-time validation (blur)
+  document.getElementById('customerName').addEventListener('blur', function() {
+    const nameError = document.getElementById('nameError');
+    if (!this.value.trim()) {
+      nameError.textContent = 'Name is required';
+      nameError.classList.add('show');
+      this.classList.add('error');
+    } else {
+      nameError.classList.remove('show');
+      this.classList.remove('error');
+    }
+  });
+
+  document.getElementById('customerEmail').addEventListener('blur', function() {
+    const emailError = document.getElementById('emailError');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!this.value.trim()) {
+      emailError.textContent = 'Email is required';
+      emailError.classList.add('show');
+      this.classList.add('error');
+    } else if (!emailRegex.test(this.value.trim())) {
+      emailError.textContent = 'Please enter a valid email';
+      emailError.classList.add('show');
+      this.classList.add('error');
+    } else {
+      emailError.classList.remove('show');
+      this.classList.remove('error');
+    }
+  });
+
+  // Submit
+  function submitCheckout() {
+    if (isSubmitting) return;
+
+    const banner = document.getElementById('errorBanner');
+    banner.classList.remove('show', 'error');
+
+    if (!validateForm()) {
+      banner.textContent = 'Please fill in all required fields.';
+      banner.classList.add('show', 'error');
+      return;
+    }
+
+    isSubmitting = true;
+    const btn = document.getElementById('submitBtn');
+    const origText = btn.textContent;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Processing...';
+
+    // Simulate payment processing (2–3 seconds)
+    setTimeout(() => {
+      // In production, this calls your backend to process payment via Stripe
+      const success = Math.random() > 0.2; // 80% success rate for demo
+
+      if (success) {
+        banner.textContent = '✓ Order placed! Check your email for confirmation.';
+        banner.classList.add('show', 'success');
+        setTimeout(() => {
+          window.location.href = 'storefront.html'; // Redirect to storefront after success
+        }, 2000);
+      } else {
+        banner.textContent = 'Payment failed. Your card was declined. Please try again.';
+        banner.classList.add('show', 'error');
+        btn.disabled = false;
+        btn.textContent = origText;
+        isSubmitting = false;
+      }
+    }, 2500);
+  }
+
+  function goBack() {
+    window.location.href = 'storefront.html';
+  }
+
+  // Init
+  updateQtyDisplay();
+</script>
+
+</body>
+</html>

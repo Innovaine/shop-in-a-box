@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .box { fill: #fff; stroke: #d1d5db; stroke-width: 2; }
+      .active { fill: #9333ea; }
+      .text-title { font-size: 16px; font-weight: 700; fill: #1f2937; }
+      .text-label { font-size: 13px; fill: #6b7280; }
+      .arrow { stroke: #9333ea; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .step-number { font-size: 14px; font-weight: 700; fill: #fff; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#9333ea" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" style="font-size: 20px; font-weight: 700; fill: #1f2937;">Shop-in-a-Box Checkout Flow (Week 1)</text>
+
+  <!-- Step 1: Landing -->
+  <rect class="box" x="50" y="70" width="140" height="100" rx="6"/>
+  <circle cx="75" cy="95" r="16" class="active"/>
+  <text x="75" y="102" text-anchor="middle" class="step-number">1</text>
+  <text x="170" y="95" class="text-title">Landing</text>
+  <text x="170" y="115" class="text-label">Storefront grid</text>
+  <text x="170" y="130" class="text-label">5 products</text>
+  <text x="170" y="145" class="text-label">Each with price</text>
+
+  <!-- Arrow 1 -->
+  <path class="arrow" d="M 220 120 L 280 120"/>
+
+  <!-- Step 2: Product Detail -->
+  <rect class="box" x="290" y="70" width="140" height="100" rx="6"/>
+  <circle cx="315" cy="95" r="16" class="active"/>
+  <text x="315" y="102" text-anchor="middle" class="step-number">2</text>
+  <text x="410" y="95" class="text-title">Product Detail</text>
+  <text x="410" y="115" class="text-label">Image, description</text>
+  <text x="410" y="130" class="text-label">Quantity selector</text>
+  <text x="410" y="145" class="text-label">"Checkout" button</text>
+
+  <!-- Arrow 2 -->
+  <path class="arrow" d="M 460 120 L 520 120"/>
+
+  <!-- Step 3: Checkout Form -->
+  <rect class="box" x="530" y="70" width="140" height="100" rx="6"/>
+  <circle cx="555" cy="95" r="16" class="active"/>
+  <text x="555" y="102" text-anchor="middle" class="step-number">3</text>
+  <text x="650" y="95" class="text-title">Checkout</text>
+  <text x="650" y="115" class="text-label">Name, email</text>
+  <text x="650" y="130" class="text-label">Address</text>
+  <text x="650" y="145" class="text-label">Card (dummy)</text>
+
+  <!-- Arrow 3 -->
+  <path class="arrow" d="M 700 120 L 760 120"/>
+
+  <!-- Step 4: Confirmation -->
+  <rect class="box" x="770" y="70" width="140" height="100" rx="6"/>
+  <circle cx="795" cy="95" r="16" class="active"/>
+  <text x="795" y="102" text-anchor="middle" class="step-number">4</text>
+  <text x="890" y="95" class="text-title">Confirmation</text>
+  <text x="890" y="115" class="text-label">Order receipt</text>
+  <text x="890" y="130" class="text-label">Email sent</text>
+  <text x="890" y="145" class="text-label">No order status</text>
+
+  <!-- Backend notes -->
+  <rect class="box" x="50" y="220" width="860" height="150" rx="6"/>
+  <text x="60" y="245" class="text-title">Backend (Day 2–4)</text>
+  
+  <text x="60" y="275" class="text-label">• Merchant login (1 static account for florist demo)</text>
+  <text x="60" y="295" class="text-label">• Product upload form (title, price, emoji placeholder)</text>
+  <text x="60" y="315" class="text-label">• Generates public storefront URL (no auth needed)</text>
+  <text x="60" y="335" class="text-label">• Order webhook: customer data → email to merchant + confirmation to buyer</text>
+  <text x="60" y="355" class="text-label">• Payment: Stripe Checkout (no custom form handling, just embedded link)</text>
+  
+  <!-- What's NOT included -->
+  <rect class="box" style="fill: #fef2f2; stroke: #fecaca;" x="50" y="390" width="860" height="0" rx="6"/>
+  <text x="60" y="390" style="font-size: 12px; fill: #991b1b; font-weight: 600;">NOT in v1: multi-item cart, order tracking dashboard, inventory limits, user auth, analytics, email customization</text>
+</svg>

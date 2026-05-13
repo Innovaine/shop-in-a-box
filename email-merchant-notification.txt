@@ -1,0 +1,35 @@
+Subject: New Order — Rose Bouquet
+
+---
+
+You have a new order on your Shop-in-a-Box storefront.
+
+CUSTOMER
+–––––––––––––––––––––––––––––
+Name: Sarah Chen
+Email: sarah@example.com
+Address: 
+  123 Main St
+  Portland, OR 97201
+
+WHAT THEY ORDERED
+–––––––––––––––––––––––––––––
+Rose Bouquet (qty: 1)
+Price: $45.00
+
+PAYMENT
+–––––––––––––––––––––––––––––
+Status: Confirmed
+Amount: $45.00
+
+NEXT STEPS
+–––––––––––––––––––––––––––––
+1. Prepare the order
+2. Reply to the customer's email (sarah@example.com) with a shipping/pickup time
+3. Once dispatched, we'll handle the rest
+
+No order dashboard yet—just manage it here in your email inbox.
+
+–––––––––––––––––––––––––––––
+Shop-in-a-Box | Merchant Hub
+https://shop.innovaine.app/admin

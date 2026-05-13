@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Created — Shop-in-a-Box</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #1f2937;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      max-width: 500px;
+      width: 100%;
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .success-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #111827;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .info-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .info-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .business-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 16px;
+    }
+
+    .product-count {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .url-section {
+      background: #f0f9ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 12px;
+      margin-top: 16px;
+    }
+
+    .url-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #1e40af;
+      margin-bottom: 6px;
+    }
+
+    .url-display {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .url-text {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e40af;
+      word-break: break-all;
+      font-family: 'Monaco', 'Courier New', monospace;
+    }
+
+    .copy-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: #2563eb;
+    }
+
+    .next-steps {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 16px;
+      margin-bottom: 24px;
+      text-align: left;
+      border-radius: 4px;
+    }
+
+    .next-steps-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #92400e;
+      margin-bottom: 8px;
+    }
+
+    .next-steps ol {
+      font-size: 13px;
+      color: #b45309;
+      padding-left: 20px;
+    }
+
+    .next-steps li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #059669;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #047857;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .btn-secondary:hover {
+      background: #d1d5db;
+    }
+
+    .email-notice {
+      font-size: 12px;
+      color: #6b7280;
+      padding: 12px;
+      background: #f3f4f6;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .share-section {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 24px;
+      margin-top: 24px;
+    }
+
+    .share-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .share-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+
+    .share-btn:hover {
+      background: #f3f4f6;
+      border-color: #9ca3af;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 32px 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .url-display {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .copy-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="success-icon">✨</div>
+
+  <h1>Your Shop is Live!</h1>
+  <p class="subtitle">Bloom & Stem is ready to accept orders. Your customers can shop right now.</p>
+
+  <div class="info-box">
+    <div class="info-label">Your Shop</div>
+    <div class="business-name">Bloom & Stem</div>
+    <div class="product-count">📦 3 products ready to sell</div>
+    
+    <div class="url-section">
+      <div class="url-label">Storefront Link</div>
+      <div class="url-display">
+        <div class="url-text" id="storeUrl">https://shop.innovaine.app/bloom-stem-001</div>
+        <button class="copy-btn" onclick="copyUrl()">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="email-notice">
+    ✓ We've sent instructions to <strong>owner@bloomstem.local</strong>. Check your email for login details and next steps.
+  </div>
+
+  <div class="next-steps">
+    <div class="next-steps-title">What Happens Next</div>
+    <ol>
+      <li><strong>Share your link</strong> — Send the storefront URL to friends, family, and customers. They can order anytime.</li>
+      <li><strong>Receive order emails</strong> — Each order will land in your inbox with customer details and payment status.</li>
+      <li><strong>Fulfill orders</strong> — Prepare and ship. Reply to customers with shipping updates.</li>
+      <li><strong>Get paid</strong> — We'll deposit earnings to your account every Friday (minus processing fees).</li>
+    </ol>
+  </div>
+
+  <div class="button-group">
+    <button class="btn btn-primary" onclick="viewStorefront()">View Your Shop</button>
+    <button class="btn btn-secondary" onclick="goHome()">Back to Home</button>
+  </div>
+
+  <div class="share-section">
+    <div class="share-title">Share with your network</div>
+    <div class="share-buttons">
+      <button class="share-btn" title="Share on Twitter" onclick="shareOn('twitter')">𝕏</button>
+      <button class="share-btn" title="Share on Facebook" onclick="shareOn('facebook')">f</button>
+      <button class="share-btn" title="Copy link" onclick="copyUrl()">🔗</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function copyUrl() {
+    const url = document.getElementById('storeUrl').textContent;
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = event.target;
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    }).catch(() => {
+      alert('Failed to copy. You can select and copy manually: ' + url);
+    });
+  }
+
+  function viewStorefront() {
+    // In production, navigate to the actual merchant's storefront
+    window.location.href = 'storefront.html';
+  }
+
+  function goHome() {
+    // In production, navigate to dashboard or home
+    window.location.href = 'merchant-upload.html';
+  }
+
+  function shareOn(platform) {
+    const url = document.getElementById('storeUrl').textContent;
+    const text = 'I just launched my shop on Shop-in-a-Box! Order fresh flowers from Bloom & Stem.';
+    
+    let shareUrl;
+    if (platform === 'twitter') {
+      shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    } else if (platform === 'facebook') {
+      shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=550,height=420');
+    }
+  }
+</script>
+
+</body>
+</html>

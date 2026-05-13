@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop-in-a-Box — Merchant Upload</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #9333ea;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .product-list {
+      background: #f9fafb;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .product-item {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+    }
+
+    .product-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-name {
+      font-weight: 600;
+      color: #1f2937;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .product-emoji {
+      font-size: 32px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 4px 8px;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+
+    .remove-btn:hover {
+      color: #dc2626;
+    }
+
+    .add-product-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .add-product-form > div:nth-child(4) {
+      grid-column: 1 / -1;
+    }
+
+    .btn-add {
+      background: #9333ea;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 12px;
+      grid-column: 1 / -1;
+    }
+
+    .btn-add:hover {
+      background: #7e22ce;
+    }
+
+    .emoji-picker {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .emoji-btn {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .emoji-btn:hover {
+      background: #f3f4f6;
+      border-color: #9333ea;
+    }
+
+    .emoji-btn.selected {
+      background: #9333ea;
+      border-color: #9333ea;
+    }
+
+    .storefront-url {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 6px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .storefront-url-label {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .url-box {
+      display: flex;
+      gap: 8px;
+    }
+
+    .url-input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 13px;
+      background: white;
+      color: #1f2937;
+    }
+
+    .btn-copy {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .btn-copy:hover {
+      background: #16a34a;
+    }
+
+    .btn-primary {
+      width: 100%;
+      background: #9333ea;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 24px;
+    }
+
+    .btn-primary:hover {
+      background: #7e22ce;
+    }
+
+    .btn-primary:disabled {
+      background: #d1d5db;
+      cursor: not-allowed;
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .demo-notice {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      color: #92400e;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 24px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .add-product-form {
+        grid-template-columns: 1fr;
+      }
+
+      .url-box {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="header">
+    <h1>Shop-in-a-Box</h1>
+    <p>Create your free storefront in 60 seconds</p>
+  </div>
+
+  <div class="demo-notice">
+    💡 <strong>Demo mode:</strong> No payment processing yet. We'll email you a link to your live storefront.
+  </div>
+
+  <form id="merchantForm" onsubmit="handleSubmit(event)">
+    
+    <!-- Business Info -->
+    <div class="section">
+      <div class="section-title">Your Shop</div>
+      
+      <div class="form-group">
+        <label for="businessName">Business Name</label>
+        <input 
+          type="text" 
+          id="businessName" 
+          placeholder="e.g., Bloom & Stem" 
+          required
+        >
+        <div class="help-text">This appears at the top of your storefront</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          placeholder="you@example.com" 
+          required
+        >
+        <div class="help-text">We'll send order notifications here</div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Shop Description</label>
+        <textarea 
+          id="description" 
+          placeholder="Fresh flowers for every occasion..."
+        ></textarea>
+        <div class="help-text">Optional. Shows below your shop name.</div>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="section">
+      <div class="section-title">Your Products</div>
+      
+      <div class="product-list" id="productList">
+        <p style="color: #6b7280; font-size: 13px; text-align: center; padding: 20px;">
+          Add at least 1 product to create your storefront.
+        </p>
+      </div>
+
+      <div class="add-product-form">
+        <div>
+          <label for="productName" style="display: block;">Product Name</label>
+          <input type="text" id="productName" placeholder="e.g., Rose Bouquet">
+        </div>
+        
+        <div>
+          <label for="productPrice" style="display: block;">Price ($)</label>
+          <input type="number" id="productPrice" placeholder="29" step="0.01" min="0.01">
+        </div>
+
+        <div style="grid-column: 1 / -1;">
+          <label>Icon / Emoji</label>
+          <div class="emoji-picker" id="emojiPicker">
+            <button type="button" class="emoji-btn" data-emoji="🌹">🌹</button>
+            <button type="button" class="emoji-btn" data-emoji="🌸">🌸</button>
+            <button type="button" class="emoji-btn" data-emoji="🌺">🌺</button>
+            <button type="button" class="emoji-btn" data-emoji="🌻">🌻</button>
+            <button type="button" class="emoji-btn" data-emoji="🌷">🌷</button>
+            <button type="button" class="emoji-btn" data-emoji="💐">💐</button>
+          </div>
+          <div class="help-text" style="margin-top: 12px;">Pick one or click in the field to type a custom emoji</div>
+          <input type="text" id="productEmoji" placeholder="🌹" style="margin-top: 8px;">
+        </div>
+
+        <button type="button" class="btn-add" onclick="addProduct()">+ Add Product</button>
+      </div>
+    </div>
+
+    <!-- Storefront URL -->
+    <div class="section">
+      <div class="section-title">Your Public Link</div>
+      
+      <div class="storefront-url">
+        <div class="storefront-url-label">Your customers visit this (no password needed)</div>
+        <div class="url-box">
+          <input 
+            type="text" 
+            class="url-input" 
+            id="storefrontUrl" 
+            readonly 
+            value="https://shop.innovaine.app/bloom-stem-12345"
+          >
+          <button type="button" class="btn-copy" onclick="copyUrl()">Copy</button>
+        </div>
+        <div class="help-text" style="margin-top: 12px;">Generated after you submit. Share this link via email, social, or print.</div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn-primary" id="submitBtn">Create My Storefront</button>
+  </form>
+
+</div>
+
+<script>
+  let selectedEmoji = null;
+  const products = [];
+
+  // Emoji picker
+  document.querySelectorAll('.emoji-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      selectedEmoji = btn.dataset.emoji;
+      document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('productEmoji').value = selectedEmoji;
+    });
+  });
+
+  document.getElementById('productEmoji').addEventListener('input', (e) => {
+    selectedEmoji = e.target.value;
+  });
+
+  function addProduct() {
+    const name = document.getElementById('productName').value.trim();
+    const price = parseFloat(document.getElementById('productPrice').value);
+    const emoji = document.getElementById('productEmoji').value || '🌹';
+
+    if (!name || !price || price <= 0) {
+      alert('Please fill in product name and price');
+      return;
+    }
+
+    products.push({ name, price, emoji, id: Date.now() });
+    
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    document.getElementById('productEmoji').value = '';
+    document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+    selectedEmoji = null;
+
+    renderProducts();
+    document.getElementById('submitBtn').disabled = false;
+  }
+
+  function removeProduct(id) {
+    const idx = products.findIndex(p => p.id === id);
+    if (idx !== -1) products.splice(idx, 1);
+    renderProducts();
+    if (products.length === 0) {
+      document.getElementById('submitBtn').disabled = true;
+    }
+  }
+
+  function renderProducts() {
+    const list = document.getElementById('productList');
+    if (products.length === 0) {
+      list.innerHTML = '<p style="color: #6b7280; font-size: 13px; text-align: center; padding: 20px;">Add at least 1 product to create your storefront.</p>';
+      return;
+    }
+
+    list.innerHTML = products.map(p => `
+      <div class="product-item">
+        <div style="display: flex; align-items: center; flex: 1;">
+          <div class="product-emoji">${p.emoji}</div>
+          <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">$${p.price.toFixed(2)}</div>
+          </div>
+        </div>
+        <button type="button" class="remove-btn" onclick="removeProduct(${p.id})">Remove</button>
+      </div>
+    `).join('');
+  }
+
+  function copyUrl() {
+    const url = document.getElementById('storefrontUrl').value;
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('storefrontUrl').parentElement.querySelector('.btn-copy');
+      const orig = btn.innerText;
+      btn.innerText = '✓ Copied';
+      setTimeout(() => { btn.innerText = orig; }, 2000);
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (products.length === 0) {
+      alert('Please add at least one product');
+      return;
+    }
+
+    const name = document.getElementById('businessName').value;
+    const email = document.getElementById('email').value;
+
+    alert(`
+      ✓ Shop created!
+
+      Business: ${name}
+      Email: ${email}
+      Products: ${products.length}
+
+      Next: Check your email for your live storefront link.
+      
+      (In production, we'd generate a unique URL here and send it to ${email})
+    `);
+  }
+
+  document.getElementById('submitBtn').disabled = true;
+</script>
+
+</body>
+</html>
