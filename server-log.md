@@ -1499,3 +1499,22 @@ _Pre-SSH: warehouse pushed to GitHub as commit `f2c56da` so the server's `git pu
 ```
 cd ~/shop-in-a-box && find test-results -name "*.png" -o -name "*.log" -o -name "trace.zip" 2>/dev/null | head -20
 ```
+
+## 2026-05-13T19:27:23.912Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `74f8f5f` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2623ms)
+```
+cd ~/shop-in-a-box && curl -s -X POST http://localhost:3000/api/merchant/create \
+  -H "Content-Type: application/json" \
+  -d '{"shopName":"Day2Test","category":"bakery","email":"day2@test.com","items":[{"name":"Cake","description":"Test","price":10}]}' | jq .
+```
+STDOUT:
+```
+{
+  "success": true,
+  "merchantId": "00ec20fd-29d6-4caf-ab62-151a16bb1b4e",
+  "shopUrl": "http://localhost:3000/shop/00ec20fd-29d6-4caf-ab62-151a16bb1b4e"
+}
+```
+Full output: [`server-runs/2026-05-13T19-27-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-27-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
