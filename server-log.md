@@ -486,3 +486,22 @@ _Pre-SSH: warehouse pushed to GitHub as commit `8c26fb4` so the server's `git pu
 cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/ --reporter=list 2>&1
 ```
 ERROR: SSH exec timeout (30000ms)
+
+## 2026-05-13T18:48:38.402Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `340e229` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2592ms)
+```
+curl -s http://localhost:3000/health | jq . && docker ps | grep shop
+```
+STDOUT:
+```
+{
+  "status": "ok",
+  "timestamp": "2026-05-13T18:48:38.290Z",
+  "merchants": 4,
+  "orders": 1
+}
+e1247e9c9f61   shop-in-a-box-app           "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes (unhealthy)     0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp   shop-in-a-box-app-1
+```
+Full output: [`server-runs/2026-05-13T18-48-38-app-curl--s-http-localhost-3000-health-jq-.--1.log`](server-runs/2026-05-13T18-48-38-app-curl--s-http-localhost-3000-health-jq-.--1.log)
