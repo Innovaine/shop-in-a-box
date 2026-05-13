@@ -1445,3 +1445,12 @@ shop-in-a-box-app-1   shop-in-a-box-app   "docker-entrypoint.s…"   app       3
 }
 ```
 Full output: [`server-runs/2026-05-13T19-23-35-app-cd-shop-in-a-box-docker-compose-ps-curl--1.log`](server-runs/2026-05-13T19-23-35-app-cd-shop-in-a-box-docker-compose-ps-curl--1.log)
+
+## 2026-05-13T19:24:30.398Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `be09db5` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exec-error: SSH exec timeout (30000ms), 32231ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/merchant-upload.spec.ts --reporter=list
+```
+ERROR: SSH exec timeout (30000ms)
