@@ -2208,3 +2208,12 @@ Running 1 test using 1 worker
   1 passed (836ms)
 ```
 Full output: [`server-runs/2026-05-13T19-57-20-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-57-20-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
+
+## 2026-05-13T19:57:50.951Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `216f384` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exit 1, 2304ms)
+```
+cd ~/shop-in-a-box && timeout 60 bash -c 'PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/checkout.spec.ts --reporter=list > /tmp/checkout-test.log 2>&1' && cat /tmp/checkout-test.log
+```
+ERROR: command exited 1
