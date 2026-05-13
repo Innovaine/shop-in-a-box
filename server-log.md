@@ -2017,3 +2017,12 @@ STDOUT:
 }
 ```
 Full output: [`server-runs/2026-05-13T19-50-09-app-curl--s-http-localhost-3000-health-jq-.-1.log`](server-runs/2026-05-13T19-50-09-app-curl--s-http-localhost-3000-health-jq-.-1.log)
+
+## 2026-05-13T19:51:01.824Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `a7fc9a8` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✗ exec-error: SSH exec timeout (30000ms), 33138ms)
+```
+cd ~/shop-in-a-box && timeout 30 npx playwright test tests/web/merchant-upload.spec.ts 2>&1 | tail -40
+```
+ERROR: SSH exec timeout (30000ms)
