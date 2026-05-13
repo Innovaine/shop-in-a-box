@@ -2324,3 +2324,11 @@ drwxrwxr-x 13 tester tester 4096 May 13 19:59 ..
 drwxrwxr-x  2 tester tester 4096 May 13 19:59 tests-web-merchant-upload--9f602-n-upload-shop-with-products
 ```
 Full output: [`server-runs/2026-05-13T20-00-07-app-cd-shop-in-a-box-ls--la-test-results-2-d-1.log`](server-runs/2026-05-13T20-00-07-app-cd-shop-in-a-box-ls--la-test-results-2-d-1.log)
+
+## 2026-05-13T20:00:31.413Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `099ee04` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2179ms)
+```
+cd ~/shop-in-a-box && find . -name "storefront-display.png" -o -name "checkout-*.png" -o -name "merchant-upload-*.png" 2>/dev/null
+```
