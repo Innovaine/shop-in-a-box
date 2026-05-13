@@ -412,3 +412,26 @@ _Pre-SSH: warehouse pushed to GitHub as commit `46efdcf` so the server's `git pu
 cd ~/shop-in-a-box && git pull && ls -la tests/
 ```
 ERROR: command exited 1
+
+## 2026-05-13T18:46:25.541Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `98e2c02` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2684ms)
+```
+ls -la ~/
+```
+STDOUT:
+```
+total 40
+drwxr-x---  7 tester tester 4096 May 13 06:41 .
+drwxr-xr-x  7 root   root   4096 May 13 18:28 ..
+-rw-r--r--  1 tester tester  220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 tester tester 3771 Mar 31  2024 .bashrc
+drwx------  3 tester tester 4096 May 13 16:35 .cache
+drwx------  3 tester tester 4096 May 13 06:04 .docker
+drwxrwxr-x  4 tester tester 4096 May 13 06:41 .npm
+-rw-r--r--  1 tester tester  807 Mar 31  2024 .profile
+drwx------  2 tester tester 4096 May 13 05:11 .ssh
+drwxrwxr-x 23 tester tester 4096 May 13 17:23 email-to-sql
+```
+Full output: [`server-runs/2026-05-13T18-46-25-app-ls--la-1.log`](server-runs/2026-05-13T18-46-25-app-ls--la-1.log)
