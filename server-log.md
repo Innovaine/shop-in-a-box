@@ -1518,3 +1518,17 @@ STDOUT:
 }
 ```
 Full output: [`server-runs/2026-05-13T19-27-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-27-23-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
+
+## 2026-05-13T19:30:11.511Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `58eab83` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 3579ms)
+```
+curl -s "http://localhost:3000/shop/00ec20fd-29d6-4caf-ab62-151a16bb1b4e" | grep -E "(shop-name|Loading|Day2Test|Cake)" | head -10
+```
+STDOUT:
+```
+      <h1 id="shop-name">Loading shop...</h1>
+      document.getElementById('shop-name').textContent = shopName || 'Shop';
+```
+Full output: [`server-runs/2026-05-13T19-30-11-app-curl--s-http-localhost-3000-shop-00ec20f-1.log`](server-runs/2026-05-13T19-30-11-app-curl--s-http-localhost-3000-shop-00ec20f-1.log)
