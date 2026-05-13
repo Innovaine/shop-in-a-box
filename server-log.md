@@ -1056,3 +1056,80 @@ PAGE ERROR: missing ) after argument list
 H1 text: Loading shop...
 ```
 Full output: [`server-runs/2026-05-13T19-12-12-app-cd-shop-in-a-box-git-pull---ff-only-PLAY-1.log`](server-runs/2026-05-13T19-12-12-app-cd-shop-in-a-box-git-pull---ff-only-PLAY-1.log)
+
+## 2026-05-13T19:13:00.248Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `e8b31fb` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 8402ms) _(showing tail — full 3,789B stdout + 0B stderr)_
+```
+cd ~/shop-in-a-box && git pull --ff-only && docker compose down && docker compose build && docker compose up -d && sleep 3
+```
+STDOUT:
+```
+…ate mode 100644 merchant-onboard.html
+ create mode 100644 merchant-success.html
+ create mode 100644 storefront-loading.html
+ create mode 100644 test-results/day-01/report.md
+ create mode 100644 tests/debug-storefront.js
+ create mode 100644 tests/web/checkout.spec.ts
+ create mode 100644 tests/web/merchant-upload.spec.ts
+ create mode 100644 tests/web/storefront.spec.ts
+ create mode 100644 validation-checklist.md
+#1 [internal] load local bake definitions
+#1 reading from stdin 508B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 331B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 76.01kB done
+#5 DONE 0.0s
+
+#6 [1/8] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#6 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+#6 DONE 0.0s
+
+#7 [3/8] COPY package*.json ./
+#7 CACHED
+
+#8 [5/8] COPY src/ ./src/
+#8 CACHED
+
+#9 [6/8] COPY *.html ./
+#9 CACHED
+
+#10 [4/8] RUN npm install --production
+#10 CACHED
+
+#11 [7/8] COPY *.txt ./
+#11 CACHED
+
+#12 [2/8] WORKDIR /app
+#12 CACHED
+
+#13 [8/8] COPY *.svg ./
+#13 CACHED
+
+#14 exporting to image
+#14 exporting layers done
+#14 exporting manifest sha256:8704d53da4d9d6af98d526fde330fedd24bb3b3e070cef36ba82126650c3b5c0 done
+#14 exporting config sha256:6e6029eb6b2bf5f0160997a8803fd264217ae4293f0481e7f13d7b769d883aa6 done
+#14 exporting attestation manifest sha256:43df20e6d5326c36b8c8f36750dd2b843d33336f60dae4d38e6d16616829f98b 0.0s done
+#14 exporting manifest list sha256:013d6f6c1ddbae64215367fe484880b6e9bf7df5fa10c15348697aad2bc6e5ba done
+#14 naming to docker.io/library/shop-in-a-box-app:latest done
+#14 unpacking to docker.io/library/shop-in-a-box-app:latest done
+#14 DONE 0.1s
+
+#15 resolving provenance for metadata file
+#15 DONE 0.0s
+```
+Full output: [`server-runs/2026-05-13T19-13-00-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-13-00-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
