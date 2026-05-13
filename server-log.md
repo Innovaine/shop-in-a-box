@@ -1827,3 +1827,16 @@ STDOUT:
 {"status":"ok","timestamp":"2026-05-13T19:46:06.890Z","merchants":5,"orders":0}
 ```
 Full output: [`server-runs/2026-05-13T19-46-06-app-cd-shop-in-a-box-curl--s-http-localhost--1.log`](server-runs/2026-05-13T19-46-06-app-cd-shop-in-a-box-curl--s-http-localhost--1.log)
+
+## 2026-05-13T19:46:32.183Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `478a156` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✓ exit 0, 2371ms)
+```
+cd ~/shop-in-a-box && curl -s -X POST http://localhost:3000/api/merchant/create -H "Content-Type: application/json" -d '{"shopName":"Day3Fix","category":"test","email":"day3@test.com","items":[{"name":"TestItem","description":"Fixed","price":12.50}]}' && echo ""
+```
+STDOUT:
+```
+{"success":true,"merchantId":"f008cd0c-579a-4ef4-9deb-6410b91f6eb1","shopUrl":"http://localhost:3000/shop/f008cd0c-579a-4ef4-9deb-6410b91f6eb1"}
+```
+Full output: [`server-runs/2026-05-13T19-46-32-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-46-32-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
