@@ -553,3 +553,12 @@ Running 1 test using 1 worker
 EXIT_CODE: 0
 ```
 Full output: [`server-runs/2026-05-13T18-48-57-app-cd-shop-in-a-box-timeout-120-bash--c-PLA-1.log`](server-runs/2026-05-13T18-48-57-app-cd-shop-in-a-box-timeout-120-bash--c-PLA-1.log)
+
+## 2026-05-13T18:49:48.506Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `66e7fbd` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exec-error: SSH exec timeout (30000ms), 31786ms)
+```
+cd ~/shop-in-a-box && timeout 120 bash -c 'PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/checkout.spec.ts --reporter=list' 2>&1 | tee /tmp/playwright-checkout.log
+```
+ERROR: SSH exec timeout (30000ms)
