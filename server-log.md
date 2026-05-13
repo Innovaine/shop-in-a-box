@@ -1951,3 +1951,12 @@ Running 1 test using 1 worker
   1 passed (870ms)
 ```
 Full output: [`server-runs/2026-05-13T19-48-01-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-48-01-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
+
+## 2026-05-13T19:48:46.552Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `18dd405` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✗ exec-error: SSH exec timeout (30000ms), 33561ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/checkout.spec.ts 2>&1 | tail -60
+```
+ERROR: SSH exec timeout (30000ms)
