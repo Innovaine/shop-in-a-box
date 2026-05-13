@@ -1473,3 +1473,21 @@ cd ~/shop-in-a-box && nohup bash -c "PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/p
 sleep 2 && echo "Tests running in background, check /tmp/test-run-day2.log"
 ```
 ERROR: Connection timed out
+
+## 2026-05-13T19:26:17.389Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `6e24f56` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2478ms)
+```
+ls -la ~/shop-in-a-box/test-results/ 2>/dev/null | tail -20
+```
+STDOUT:
+```
+total 20
+drwxrwxr-x  5 tester tester 4096 May 13 19:26 .
+drwxrwxr-x 12 tester tester 4096 May 13 19:25 ..
+drwxrwxr-x  2 tester tester 4096 May 13 19:25 .playwright-artifacts-0
+drwxrwxr-x  2 tester tester 4096 May 13 19:26 tests-web-merchant-upload--9f602-n-upload-shop-with-products
+drwxrwxr-x  2 tester tester 4096 May 13 19:25 tests-web-storefront-store-d8d8d-merchant-products-correctly
+```
+Full output: [`server-runs/2026-05-13T19-26-17-app-ls--la-shop-in-a-box-test-results-2-dev--1.log`](server-runs/2026-05-13T19-26-17-app-ls--la-shop-in-a-box-test-results-2-dev--1.log)
