@@ -1491,3 +1491,11 @@ drwxrwxr-x  2 tester tester 4096 May 13 19:26 tests-web-merchant-upload--9f602-n
 drwxrwxr-x  2 tester tester 4096 May 13 19:25 tests-web-storefront-store-d8d8d-merchant-products-correctly
 ```
 Full output: [`server-runs/2026-05-13T19-26-17-app-ls--la-shop-in-a-box-test-results-2-dev--1.log`](server-runs/2026-05-13T19-26-17-app-ls--la-shop-in-a-box-test-results-2-dev--1.log)
+
+## 2026-05-13T19:26:54.491Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `f2c56da` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2198ms)
+```
+cd ~/shop-in-a-box && find test-results -name "*.png" -o -name "*.log" -o -name "trace.zip" 2>/dev/null | head -20
+```
