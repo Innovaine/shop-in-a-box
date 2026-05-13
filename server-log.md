@@ -107,3 +107,16 @@ _Pre-SSH: warehouse pushed to GitHub as commit `fb7a2b1` so the server's `git pu
 cd ~/shop-in-a-box && git pull --ff-only
 ```
 ERROR: command exited 1
+
+## 2026-05-13T18:41:59.776Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `9ab01a0` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 3241ms)
+```
+cd ~ && git clone https://github.com/Innovaine/shop-in-a-box.git shop-in-a-box 2>&1 | head -20
+```
+STDOUT:
+```
+Cloning into 'shop-in-a-box'...
+```
+Full output: [`server-runs/2026-05-13T18-41-59-app-cd-git-clone-https-github.com-Innovaine--1.log`](server-runs/2026-05-13T18-41-59-app-cd-git-clone-https-github.com-Innovaine--1.log)
