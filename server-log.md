@@ -1400,3 +1400,12 @@ Node.js v24.15.0
 ```
 ERROR: command exited 1
 Full output: [`server-runs/2026-05-13T19-16-04-app-cd-shop-in-a-box-sed--n-script-script-p--1.log`](server-runs/2026-05-13T19-16-04-app-cd-shop-in-a-box-sed--n-script-script-p--1.log)
+
+## 2026-05-13T19:20:36.257Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `37e0242` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exec-error: Connection timed out, 12854ms)
+```
+cd ~/shop-in-a-box && git pull --ff-only && docker compose down && docker compose build && docker compose up -d && sleep 5 && curl -s http://localhost:3000/health | jq .
+```
+ERROR: Connection timed out
