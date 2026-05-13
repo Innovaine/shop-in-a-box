@@ -1133,3 +1133,37 @@ STDOUT:
 #15 DONE 0.0s
 ```
 Full output: [`server-runs/2026-05-13T19-13-00-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-13-00-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
+
+## 2026-05-13T19:13:13.391Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `a7f2411` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 3008ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts --reporter=verbose 2>&1 | head -100
+```
+STDOUT:
+```
+Error: Cannot find module 'verbose'
+Require stack:
+- /usr/lib/node_modules/playwright/lib/cli/testActions.js
+- /usr/lib/node_modules/playwright/lib/program.js
+- /usr/lib/node_modules/@playwright/test/cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at require.resolve (node:internal/modules/helpers:171:31)
+    at resolveReporter (/usr/lib/node_modules/playwright/lib/cli/testActions.js:204:18)
+    at /usr/lib/node_modules/playwright/lib/cli/testActions.js:165:42
+    at Array.map (<anonymous>)
+    at resolveReporterOption (/usr/lib/node_modules/playwright/lib/cli/testActions.js:165:30)
+    at overridesFromOptions (/usr/lib/node_modules/playwright/lib/cli/testActions.js:128:15)
+    at runTests (/usr/lib/node_modules/playwright/lib/cli/testActions.js:44:24) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/usr/lib/node_modules/playwright/lib/cli/testActions.js',
+    '/usr/lib/node_modules/playwright/lib/program.js',
+    '/usr/lib/node_modules/@playwright/test/cli.js'
+  ]
+}
+```
+Full output: [`server-runs/2026-05-13T19-13-13-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-13-13-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
