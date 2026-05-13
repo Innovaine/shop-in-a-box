@@ -2280,3 +2280,21 @@ STDOUT:
     tests/web/checkout.spec.ts:69:5 › checkout validates required customer fields ──────────────────
 ```
 Full output: [`server-runs/2026-05-13T19-58-27-app-cat-tmp-checkout-test.log-1.log`](server-runs/2026-05-13T19-58-27-app-cat-tmp-checkout-test.log-1.log)
+
+## 2026-05-13T19:58:55.000Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `96ccf5e` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2298ms)
+```
+cd ~/shop-in-a-box && curl -s -X POST http://localhost:3000/api/merchant/create -H "Content-Type: application/json" -d '{"shopName":"CheckoutTest","category":"handmade","email":"test@test.com","items":[{"name":"Test Product","description":"Test","price":22.00}]}' | jq -r '.merchantId' > /tmp/test_merchant_id.txt && MERCHANT_ID=$(cat /tmp/test_merchant_id.txt) && echo "Created merchant: $MERCHANT_ID" && curl -s "http://localhost:3000/checkout/$MERCHANT_ID?product=0" | grep -E "(product-name|total-price|Place Order|Loading)" | head -10
+```
+STDOUT:
+```
+Created merchant: 6821561c-1088-4512-a77b-aa91fe3b95f3
+          <span class="summary-label" id="product-name">Loading...</span>
+          <span class="summary-value" id="total-price">$0.00</span>
+      <p style="margin-top: 16px; font-size: 14px; color: #7f8c8d;">Loading product details...</p>
+      document.getElementById('product-name').textContent = product.name;
+      document.getElementById('total-price').textContent = `${(product.price || 0).toFixed(2)}`;
+```
+Full output: [`server-runs/2026-05-13T19-58-54-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log`](server-runs/2026-05-13T19-58-54-app-cd-shop-in-a-box-curl--s--X-POST-http-lo-1.log)
