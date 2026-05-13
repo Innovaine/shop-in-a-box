@@ -2188,3 +2188,23 @@ shop-in-a-box-app-1   shop-in-a-box-app   "docker-entrypoint.s…"   app       8
 }
 ```
 Full output: [`server-runs/2026-05-13T19-56-11-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-56-11-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
+
+## 2026-05-13T19:57:20.798Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `da2074b` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 4170ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/storefront.spec.ts --reporter=list
+```
+STDOUT:
+```
+
+Running 1 test using 1 worker
+
+✓ Created test merchant: b93195b5-ec28-47ec-879f-41e38b8a8e40
+✓ Storefront displays all 3 products correctly
+  ✓  1 tests/web/storefront.spec.ts:5:5 › storefront displays merchant products correctly (169ms)
+
+  1 passed (836ms)
+```
+Full output: [`server-runs/2026-05-13T19-57-20-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log`](server-runs/2026-05-13T19-57-20-app-cd-shop-in-a-box-PLAYWRIGHT_BROWSERS_PAT-1.log)
