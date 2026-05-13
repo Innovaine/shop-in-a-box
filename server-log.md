@@ -1787,3 +1787,12 @@ Running 1 test using 1 worker
   1 passed (819ms)
 ```
 Full output: [`server-runs/2026-05-13T19-43-13-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log`](server-runs/2026-05-13T19-43-13-app-cd-shop-in-a-box-git-pull---ff-only-dock-1.log)
+
+## 2026-05-13T19:44:05.695Z — Anil ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `51c8b77` so the server's `git pull` will pick it up._
+
+### Command 1 on app as engineer (✗ exec-error: SSH exec timeout (30000ms), 31805ms)
+```
+cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/checkout.spec.ts --reporter=list
+```
+ERROR: SSH exec timeout (30000ms)
