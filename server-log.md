@@ -562,3 +562,20 @@ _Pre-SSH: warehouse pushed to GitHub as commit `66e7fbd` so the server's `git pu
 cd ~/shop-in-a-box && timeout 120 bash -c 'PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/checkout.spec.ts --reporter=list' 2>&1 | tee /tmp/playwright-checkout.log
 ```
 ERROR: SSH exec timeout (30000ms)
+
+## 2026-05-13T18:50:16.848Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `df44fe1` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2701ms)
+```
+cd ~/shop-in-a-box && ls -la test-results/ && find test-results -name "*.png" 2>/dev/null | head -5
+```
+STDOUT:
+```
+total 16
+drwxrwxr-x  4 tester tester 4096 May 13 18:49 .
+drwxrwxr-x 11 tester tester 4096 May 13 18:49 ..
+drwxrwxr-x  2 tester tester 4096 May 13 18:49 tests-web-checkout-checkou-9a875-es-required-customer-fields
+drwxrwxr-x  2 tester tester 4096 May 13 18:49 tests-web-checkout-custome-27a10--receive-order-confirmation
+```
+Full output: [`server-runs/2026-05-13T18-50-16-app-cd-shop-in-a-box-ls--la-test-results-fin-1.log`](server-runs/2026-05-13T18-50-16-app-cd-shop-in-a-box-ls--la-test-results-fin-1.log)
