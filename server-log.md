@@ -2126,3 +2126,12 @@ STDOUT:
       document.getElementById('loading-container').style.display = 'none';
 ```
 Full output: [`server-runs/2026-05-13T19-53-23-app-cd-shop-in-a-box-1.log`](server-runs/2026-05-13T19-53-23-app-cd-shop-in-a-box-1.log)
+
+## 2026-05-13T19:54:02.804Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `86de4ea` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✗ exit 1, 3338ms)
+```
+cd ~/shop-in-a-box && timeout 15 npx playwright test tests/web/storefront.spec.ts --reporter=verbose 2>&1 | grep -A 100 "passed\|failed"
+```
+ERROR: command exited 1
