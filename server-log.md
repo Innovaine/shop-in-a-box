@@ -1454,3 +1454,12 @@ _Pre-SSH: warehouse pushed to GitHub as commit `be09db5` so the server's `git pu
 cd ~/shop-in-a-box && PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/merchant-upload.spec.ts --reporter=list
 ```
 ERROR: SSH exec timeout (30000ms)
+
+## 2026-05-13T19:25:19.615Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `cbbe682` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✗ exec-error: SSH exec timeout (30000ms), 31807ms)
+```
+cd ~/shop-in-a-box && timeout 90 bash -c "PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers npx playwright test tests/web/merchant-upload.spec.ts --reporter=list 2>&1"
+```
+ERROR: SSH exec timeout (30000ms)
