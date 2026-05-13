@@ -180,3 +180,80 @@ STDOUT:
 }
 ```
 Full output: [`server-runs/2026-05-13T18-42-30-app-cd-shop-in-a-box-docker-compose-down-doc-1.log`](server-runs/2026-05-13T18-42-30-app-cd-shop-in-a-box-docker-compose-down-doc-1.log)
+
+## 2026-05-13T18:42:51.047Z — Søren ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `c3e2094` so the server's `git pull` will pick it up._
+
+### Command 1 on app as reviewer (✓ exit 0, 3272ms)
+```
+cd ~/shop-in-a-box && cat > /tmp/test_merchant.sh << 'EOF'
+#!/bin/bash
+
+# Test: POST /api/merchant/create with valid data (no images for now)
+RESPONSE=$(curl -s -X POST http://localhost:3000/api/merchant/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shopName": "Test Florist",
+    "category": "flowers",
+    "email": "florist@example.com",
+    "items": [
+      {"name": "Rose Bouquet", "description": "12 red roses", "price": 25.00},
+      {"name": "Daisy Bundle", "description": "20 daisies", "price": 15.00}
+    ]
+  }')
+
+echo "=== CREATE MERCHANT RESPONSE ==="
+echo "$RESPONSE" | jq .
+
+# Extract merchant ID
+MERCHANT_ID=$(echo "$RESPONSE" | jq -r '.merchantId')
+echo ""
+echo "MERCHANT_ID: $MERCHANT_ID"
+
+# Test: GET /api/merchant/:merchantId
+echo ""
+echo "=== GET MERCHANT DATA ==="
+curl -s http://localhost:3000/api/merchant/$MERCHANT_ID | jq .
+EOF
+chmod +x /tmp/test_merchant.sh
+/tmp/test_merchant.sh
+```
+STDOUT:
+```
+=== CREATE MERCHANT RESPONSE ===
+{
+  "success": true,
+  "merchantId": "2f2dee61-2542-4456-8098-be8d249e5a40",
+  "shopUrl": "http://localhost:3000/shop/2f2dee61-2542-4456-8098-be8d249e5a40"
+}
+
+MERCHANT_ID: 2f2dee61-2542-4456-8098-be8d249e5a40
+
+=== GET MERCHANT DATA ===
+{
+  "id": "2f2dee61-2542-4456-8098-be8d249e5a40",
+  "shopName": "Test Florist",
+  "category": "flowers",
+  "items": [
+    {
+      "id": "5c365a10-29fd-4762-9f5e-eb8ee0c8e56d",
+      "name": "Rose Bouquet",
+      "description": "12 red roses",
+      "price": 25,
+      "image": null,
+      "addedAt": "2026-05-13T18:42:50.960Z"
+    },
+    {
+      "id": "97822d41-ed13-49ef-a44c-d3855190ad95",
+      "name": "Daisy Bundle",
+      "description": "20 daisies",
+      "price": 15,
+      "image": null,
+      "addedAt": "2026-05-13T18:42:50.960Z"
+    }
+  ],
+  "email": "florist@example.com",
+  "createdAt": "2026-05-13T18:42:50.960Z"
+}
+```
+Full output: [`server-runs/2026-05-13T18-42-51-app-cd-shop-in-a-box-cat-tmp-test_merchant.s-1.log`](server-runs/2026-05-13T18-42-51-app-cd-shop-in-a-box-cat-tmp-test_merchant.s-1.log)
