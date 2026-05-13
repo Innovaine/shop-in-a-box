@@ -1425,3 +1425,23 @@ Fast-forward
  1 file changed, 9 insertions(+)
 ```
 Full output: [`server-runs/2026-05-13T19-20-53-app-cd-shop-in-a-box-git-pull---ff-only-1.log`](server-runs/2026-05-13T19-20-53-app-cd-shop-in-a-box-git-pull---ff-only-1.log)
+
+## 2026-05-13T19:23:35.968Z — Priya ran 1 command(s)
+_Pre-SSH: warehouse pushed to GitHub as commit `8bfe25e` so the server's `git pull` will pick it up._
+
+### Command 1 on app as tester (✓ exit 0, 2685ms)
+```
+cd ~/shop-in-a-box && docker compose ps && curl -s http://localhost:3000/health | jq .
+```
+STDOUT:
+```
+NAME                  IMAGE               COMMAND                  SERVICE   CREATED         STATUS                     PORTS
+shop-in-a-box-app-1   shop-in-a-box-app   "docker-entrypoint.s…"   app       3 minutes ago   Up 3 minutes (unhealthy)   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+{
+  "status": "ok",
+  "timestamp": "2026-05-13T19:23:35.915Z",
+  "merchants": 0,
+  "orders": 0
+}
+```
+Full output: [`server-runs/2026-05-13T19-23-35-app-cd-shop-in-a-box-docker-compose-ps-curl--1.log`](server-runs/2026-05-13T19-23-35-app-cd-shop-in-a-box-docker-compose-ps-curl--1.log)
