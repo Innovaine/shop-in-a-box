@@ -252,7 +252,7 @@
       if (!id) {
         showError(
           'No shop specified',
-          'The link you followed doesn't include a shop ID.',
+          'The link you followed does not include a shop ID.',
           'INVALID_MERCHANT_PARAM'
         );
         return null;
@@ -275,7 +275,7 @@
           if (response.status === 404) {
             showError(
               'Shop not found',
-              'This shop doesn't exist or has been removed.',
+              'This shop does not exist or has been removed.',
               `MERCHANT_NOT_FOUND: ${merchantId}`
             );
           } else {
@@ -296,7 +296,7 @@
         if (error.name === 'AbortError') {
           showError(
             'Shop is taking too long to load',
-            'The shop's data didn't arrive within 5 seconds. Try refreshing the page.',
+            'The shop data did not arrive within 5 seconds. Try refreshing the page.',
             'TIMEOUT_5S'
           );
         } else {
@@ -357,7 +357,7 @@
           <div class="error-container">
             <div class="error-icon">📦</div>
             <h2 class="error-title">No products yet</h2>
-            <p class="error-message">This shop hasn't added any products yet. Check back soon.</p>
+            <p class="error-message">This shop has not added any products yet. Check back soon.</p>
           </div>
         `;
         return;
